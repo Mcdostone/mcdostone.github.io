@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yann Prono</title>
+  <subtitle>My blog</subtitle>
+  <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
+  <link href="https://mcdostone.github.io"/>
+  <updated>2022-07-22T00:47:35Z</updated>
+  <id></id>
+  <author>
+    <name>Yann Prono</name>
+  </author>
+  <entry>
+    <title>Introduction to 3D in CSS</title>
+    <link rel="alternate" href="/articles/intro-3d-css/"/>
+    <updated>2022-07-21T00:00:00Z</updated>
+    <id>/articles/intro-3d-css/</id>
+    <summary type="html">
+      This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript.
+    </summary>
+  </entry>
+</feed>
