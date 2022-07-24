@@ -4,14 +4,14 @@
   <subtitle>My blog</subtitle>
   <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2022-07-24T04:05:21Z</updated>
+  <updated>2022-07-24T21:59:38Z</updated>
   <id></id>
   <author>
     <name>Yann Prono</name>
   </author>
   <entry>
     <title>Introduction to 3D in CSS</title>
-    <link rel="alternate" href="/articles/intro-3d-css/"/>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/intro-3d-css/"/>
     <updated>2022-07-21T00:00:00Z</updated>
     <category term="CSS"/>
     <category term="HTML"/>
