@@ -4,14 +4,28 @@
   <subtitle>My blog</subtitle>
   <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2022-07-24T21:59:38Z</updated>
-  <id></id>
+  <updated>2022-07-27T01:49:52Z</updated>
+  <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
+    <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title>Self-Documented Makefile V1.1</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/self-documented-makefile-v1-1/"/>
+    <id>https://mcdostone.github.io/articles/self-documented-makefile-v1-1/</id>
+    <updated>2022-07-26T00:00:00Z</updated>
+    <category term="Make"/>
+    <category term="bash"/>
+    <category term="Shell"/>
+    <summary type="text">
+      A trick to print Makefile variables and their values.
+    </summary>
+  </entry>
   <entry>
     <title>Introduction to 3D in CSS</title>
     <link rel="alternate" href="https://mcdostone.github.io/articles/intro-3d-css/"/>
+    <id>https://mcdostone.github.io/articles/intro-3d-css/</id>
     <updated>2022-07-21T00:00:00Z</updated>
     <category term="CSS"/>
     <category term="HTML"/>
