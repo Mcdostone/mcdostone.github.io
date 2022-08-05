@@ -4,12 +4,23 @@
   <subtitle>My blog</subtitle>
   <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2022-07-27T01:59:54Z</updated>
+  <updated>2022-08-05T01:31:12Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title>Adobe After Effects and JavaScript</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/after-effects-date/"/>
+    <id>https://mcdostone.github.io/articles/after-effects-date/</id>
+    <updated>2022-08-04T00:00:00Z</updated>
+    <category term="Adobe After Effects"/>
+    <category term="JavaScript"/>
+    <summary type="text">
+      Adobe After Effects scripting has never been so easy.
+    </summary>
+  </entry>
   <entry>
     <title>Self-Documented Makefile V1.1</title>
     <link rel="alternate" href="https://mcdostone.github.io/articles/self-documented-makefile-v1-1/"/>
