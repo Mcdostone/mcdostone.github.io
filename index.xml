@@ -4,12 +4,25 @@
   <subtitle>My blog</subtitle>
   <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2022-09-03T22:29:21Z</updated>
+  <updated>2022-11-28T16:39:34Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title>My syntax highlighter</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/syntax-highlighter/"/>
+    <id>https://mcdostone.github.io/articles/syntax-highlighter/</id>
+    <updated>2022-11-28T00:00:00Z</updated>
+    <category term="JavaScript"/>
+    <category term="CSS"/>
+    <category term="NodeJS"/>
+    <category term="Eleventy"/>
+    <summary type="text">
+      A lightweight build-time rendering nodeJS syntax highlighter module based on Shiki.
+    </summary>
+  </entry>
   <entry>
     <title>My facebook feed is a nightmare</title>
     <link rel="alternate" href="https://mcdostone.github.io/articles/my-facebook-feed-is-a-nightmare/"/>

@@ -104,7 +104,7 @@ class Cookie {
     if (this.maxAge.value !== undefined && this.maxAge.value !== undefined) {
       return this.maxAge
     }
-    return this.maxAge.value !== undefined ? this.maxAge : this.expires
+    return this.maxAge.value === undefined ? this.expires : this.maxAge
   }
 
   toString() {
@@ -123,19 +123,23 @@ class CookieAttribute<T> {
 
   toString() {
     switch (this.attribute) {
-      case CookieAttributeKind.Domain:
+      case CookieAttributeKind.Domain: {
         const domain = this.value as unknown as Domain
         return domain.value ? `${this.attribute}=${domain.toString()}` : ''
-      case CookieAttributeKind.Expires:
+      }
+      case CookieAttributeKind.Expires: {
         const date = this.value as unknown as Date
         return date ? `${this.attribute}=${date.toUTCString()}` : ''
+      }
       case CookieAttributeKind.Path:
       case CookieAttributeKind.MaxAge:
-      case CookieAttributeKind.SameSite:
-        return this.value !== undefined ? `${this.attribute}=${this.value}` : ''
+      case CookieAttributeKind.SameSite: {
+        return this.value === undefined ? '' : `${this.attribute}=${this.value}`
+      }
       case CookieAttributeKind.Secure:
-      case CookieAttributeKind.HttpOnly:
+      case CookieAttributeKind.HttpOnly: {
         return this.value ? this.attribute : ''
+      }
     }
   }
 
@@ -231,24 +235,30 @@ export class Tt extends LitElement {
         key = key.trim()
         value = value.trim()
         switch (key.toLocaleLowerCase()) {
-          case CookieAttributeKind.Domain.toLocaleLowerCase():
+          case CookieAttributeKind.Domain.toLocaleLowerCase(): {
             this.cookie.domain.value = new Domain(value)
             break
-          case CookieAttributeKind.Path.toLocaleLowerCase():
+          }
+          case CookieAttributeKind.Path.toLocaleLowerCase(): {
             this.cookie.path.value = value
             break
-          case CookieAttributeKind.Expires.toLocaleLowerCase():
+          }
+          case CookieAttributeKind.Expires.toLocaleLowerCase(): {
             this.cookie.expires.value = new Date(value)
             break
-          case CookieAttributeKind.MaxAge.toLocaleLowerCase():
+          }
+          case CookieAttributeKind.MaxAge.toLocaleLowerCase(): {
             this.cookie.maxAge.value = Number(value)
             break
-          case CookieAttributeKind.SameSite.toLocaleLowerCase():
+          }
+          case CookieAttributeKind.SameSite.toLocaleLowerCase(): {
             this.cookie.sameSite.value = value as SameSite
             break
-          default:
+          }
+          default: {
             this.cookie.name = key
             this.cookie.value = value
+          }
         }
       }
     }
@@ -312,22 +322,23 @@ export class Tt extends LitElement {
       <form>
         <fieldset>
           <label for="name">Name</label>
-          <input type="text" required id="name" name="name" .value="${this.cookie.name}" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
-      this.setName(event.target.value)}><br>
+          <input type="text" required id="name" name="name" autocorrect="off" spellcheck="false" .value="${this.cookie.name}" @input=${(
+      event: InputChangedEvent<HTMLInputElement>
+    ) => this.setName(event.target.value)}><br>
         </fieldset>
         <fieldset>
           <label for="value">Value</label>
-          <input type="text" required id="value" name="value" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
+          <input type="text" required id="value" autocorrect="off" spellcheck="false" name="value" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
             this.setValue(event.target.value)} .value="${this.cookie.value}"><br>
         </fieldset>
         <fieldset>
           <label for="domain">Domain</label>
-          <input type="text" id="domain" name="domain" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
+          <input type="text" id="domain" name="domain" autocorrect="off" spellcheck="false" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
             this.setCookieAttribute(this.cookie.domain, new Domain(event.target.value || undefined))} .value="${this.cookie.domain.value.value || ''}">
         </fieldset>
         <fieldset>
           <label for="path">Path</label>
-          <input type="text" id="path" name="path" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
+          <input type="text" id="path" name="path" autocorrect="off" spellcheck="false" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
             this.setCookieAttribute(this.cookie.path, event.target.value || undefined)} .value="${this.cookie.path.value || ''}">
         </fieldset>
         <fieldset>
@@ -365,13 +376,15 @@ export class Tt extends LitElement {
       <div class="stories">
         <fieldset>
           <label for="origin">Current URL</label>
-          <input type="url" required id="origin" name="origin" .value="${this.origin}" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
-      (this.origin = event.target.value)}><br>
+          <input type="url" autocomplete="url" autocorrect="off" spellcheck="false" required id="origin" name="origin" .value="${this.origin}" @input=${(
+      event: InputChangedEvent<HTMLInputElement>
+    ) => (this.origin = event.target.value)}><br>
         </fieldset>
         <fieldset>
           <label for="url">Request URL</label>
-          <input type="url" required id="url" name="url" .value="${this.url}" @input=${(event: InputChangedEvent<HTMLInputElement>) =>
-      (this.url = event.target.value)}><br>
+          <input type="url" autocomplete="url" autocorrect="off" spellcheck="false" required id="url" name="url" .value="${this.url}" @input=${(
+      event: InputChangedEvent<HTMLInputElement>
+    ) => (this.url = event.target.value)}><br>
         </fieldset>
 
         <h2>Initial state</h2>
@@ -441,25 +454,31 @@ function checkPrefix(origin: URL, request: URL, cookie: Cookie, type: TypeReques
 
 function checkSameSite(origin: URL, request: URL, cookie: Cookie, type: TypeRequest | undefined): Result<boolean> {
   switch (cookie.sameSite.value) {
-    case SameSite.Strict:
+    case SameSite.Strict: {
       return checkDomain(origin, request, cookie, type)
-    case SameSite.Lax:
+    }
+    case SameSite.Lax: {
       const data1 = parse(origin.toString(), { allowPrivateDomains: true })
       const data2 = parse(request.toString(), { allowPrivateDomains: true })
       const sameDomain = data1.domain === data2.domain
       if (type !== undefined) {
         switch (type) {
-          case TypeRequest.Image:
+          case TypeRequest.Image: {
             return sameDomain ? Ok(true) : Error_('Cross-site image')
-          case TypeRequest.Link:
+          }
+          case TypeRequest.Link: {
             return Ok(true)
+          }
         }
       }
       return sameDomain ? Ok(true) : Error_('SameSite=Lax: cross-site subrequest')
-    case SameSite.None:
+    }
+    case SameSite.None: {
       return cookie.secure.value ? Ok(true) : Error_("SameSite=None requires 'Secure'")
-    default:
+    }
+    default: {
       return Error_('no lo sé')
+    }
   }
 }
 
@@ -485,5 +504,5 @@ function checkDomain(origin: URL, request: URL, cookie: Cookie, type: TypeReques
 }
 
 function checkSecure(origin: URL, request: URL, cookie: Cookie, type: TypeRequest | undefined): Result<boolean> {
-  return !(cookie.secure.value === true && request.protocol !== 'https:') ? Ok(true) : Error_("Secure requires 'https:'")
+  return cookie.secure.value === true && request.protocol !== 'https:' ? Error_("Secure requires 'https'") : Ok(true)
 }
