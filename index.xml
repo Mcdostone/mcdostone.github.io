@@ -4,7 +4,7 @@
   <subtitle>My blog</subtitle>
   <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2022-11-29T16:49:52Z</updated>
+  <updated>2022-12-02T10:56:29Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
@@ -17,10 +17,10 @@
     <updated>2022-11-28T00:00:00Z</updated>
     <category term="JavaScript"/>
     <category term="CSS"/>
-    <category term="NodeJS"/>
+    <category term="Node.js"/>
     <category term="Eleventy"/>
     <summary type="text">
-      A lightweight build-time rendering nodeJS syntax highlighter module based on Shiki.
+      A lightweight build-time rendering Node.js syntax highlighter module based on Shiki.
     </summary>
   </entry>
   <entry>
