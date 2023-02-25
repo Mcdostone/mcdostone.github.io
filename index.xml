@@ -4,17 +4,27 @@
   <subtitle>My blog</subtitle>
   <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2023-03-01T00:00:00Z</updated>
+  <updated>2023-02-21T00:00:00Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
   <entry>
+    <title>Cake salé végétarien</title>
+    <link rel="alternate" href="https://mcdostone.github.io/recipes/vegetarian-savoury-cake/"/>
+    <id>https://mcdostone.github.io/recipes/vegetarian-savoury-cake/</id>
+    <updated>2023-02-21T00:00:00Z</updated>
+    <category term="recipe"/>
+    <summary type="text">
+      Cake salé végétarien aux poivrons, olives et féta
+    </summary>
+  </entry>
+  <entry>
     <title>Lasagnes de butternut et fromage de chèvre</title>
     <link rel="alternate" href="https://mcdostone.github.io/recipes/butternut-goat-cheese-lasagna/"/>
     <id>https://mcdostone.github.io/recipes/butternut-goat-cheese-lasagna/</id>
-    <updated>2023-03-01T00:00:00Z</updated>
+    <updated>2023-02-15T00:00:00Z</updated>
     <category term="recipe"/>
     <summary type="text">
       Lasagnes de butternut et fromage de chèvre
