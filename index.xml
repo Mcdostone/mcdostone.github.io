@@ -2,14 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Yann Prono</title>
   <subtitle>My blog</subtitle>
-  <link href="https:/mcdostone.github.io/index.xml" rel="self"/>
+  <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2023-02-21T00:00:00Z</updated>
+  <updated>2023-05-09T00:00:00Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title>My Arch Linux install</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/first-time-arch-linux/"/>
+    <id>https://mcdostone.github.io/articles/first-time-arch-linux/</id>
+    <updated>2023-05-09T00:00:00Z</updated>
+    <category term="Arch Linux"/>
+    <category term="Linux"/>
+    <summary type="text">
+      Just some voodoo bash scripts to install Arch Linux from scratch.
+    </summary>
+  </entry>
   <entry>
     <title>Cake salé végétarien</title>
     <link rel="alternate" href="https://mcdostone.github.io/recipes/vegetarian-savoury-cake/"/>
