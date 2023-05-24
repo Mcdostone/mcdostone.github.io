@@ -24,6 +24,11 @@ PASSWORD='user-passw0rd'
 EMAIL='foo@example.com'
 FULLNAME='Foo Bar'
 URL_SCRIPTS='https://mcdostone.github.io/articles/first-time-arch-linux/assets'" > "$DIR/.env"
+
+    SSID=$(iwctl station wlan0 get-networks | grep '\*' | awk '{print $2}')
+    if [ ! -z "$SSID"] {
+        sed "s/SSID='XXX'/SSID='$SSID'/" "$DIR/.env"
+    }
     exit 0
 fi
 
