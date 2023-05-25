@@ -49,7 +49,7 @@ cd
 pip3 install --upgrade gnome-extensions-cli
 
 # Install gnome extensions
-~/.local/bin/gnome-extensions-cli install quick-settings-tweaks@qwreey rounded-window-corners@yilozt blur-my-shell@aunetx dash-to-dock@micxgx.gmail.com user-theme@gnome-shell-extensions.gcampax.github.com remove-alt-tab-delay@daase.net windowIsReady_Remover@nunofarruca@gmail.com no-overview@fthx start-overlay-in-application-view@Hex_cz just-perfection-desktop@just-perfection nightthemeswitcher@romainvigier.fr search-light@icedman.github.com noannoyance@daase.net
+~/.local/bin/gnome-extensions-cli install quick-settings-tweaks@qwreey rounded-window-corners@yilozt blur-my-shell@aunetx dash-to-dock@micxgx.gmail.com user-theme@gnome-shell-extensions.gcampax.github.com remove-alt-tab-delay@daase.net no-overview@fthx start-overlay-in-application-view@Hex_cz just-perfection-desktop@just-perfection nightthemeswitcher@romainvigier.fr search-light@icedman.github.com 
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 gnome-extensions enable just-perfection-desktop@just-perfection
 gnome-extensions enable search-light@icedman.github.com
@@ -57,9 +57,7 @@ gnome-extensions enable rounded-window-corners@yilozt
 gnome-extensions enable nightthemeswitcher@romainvigier.fr
 gnome-extensions enable blur-my-shell@aunetx
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
-gnome-extensions enable noannoyance@daase.net
 gnome-extensions enable remove-alt-tab-delay@daase.net
-gnome-extensions enable windowIsReady_Remover@nunofarruca@gmail.com
 
 # Theme for gnome-terminal
 dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors "false"
@@ -139,7 +137,7 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/blur-my-shell@aunetx
 gsettings --schemadir ~/.local/share/gnome-shell/extensions//just-perfection-desktop@just-perfection/schemas/ set org.gnome.shell.extensions.just-perfection clock-menu-position 1
 gsettings --schemadir ~/.local/share/gnome-shell/extensions//just-perfection-desktop@just-perfection/schemas/ set org.gnome.shell.extensions.just-perfection activities-button false
 gsettings --schemadir ~/.local/share/gnome-shell/extensions//just-perfection-desktop@just-perfection/schemas/ set org.gnome.shell.extensions.just-perfection window-demands-attention-focus true
-gsettings --schemadir ~/.local/share/gnome-shell/extensions//just-perfection-desktop@just-perfection/schemas/ set org.gnome.shell.extensions.just-perfection startup-status 1
+gsettings --schemadir ~/.local/share/gnome-shell/extensions//just-perfection-desktop@just-perfection/schemas/ set org.gnome.shell.extensions.just-perfection startup-status 0
 
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/ set org.gnome.shell.extensions.dash-to-dock pressure-threshold 0
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/ set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
