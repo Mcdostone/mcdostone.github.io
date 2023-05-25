@@ -42,7 +42,7 @@ pacman -S --noconfirm gnome gnome-tweaks gnome-shell-extensions networkmanager g
 systemctl enable gdm
 systemctl enable NetworkManager
 # I don't need these packages
-pacman --noconfirm -R gnome-maps gnome-weather gnome-contacts gnome-clocks gnome-music gnome-video epiphany totem
+pacman --noconfirm -R gnome-maps gnome-weather gnome-contacts gnome-clocks gnome-music epiphany totem
 
 # Post install instructions
 pacman -S --noconfirm fish firefox-developer-edition flatpak

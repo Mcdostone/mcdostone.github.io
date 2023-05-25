@@ -24,14 +24,14 @@ PASSWORD='user-passw0rd'
 EMAIL='foo@example.com'
 FULLNAME='Foo Bar'
 URL_SCRIPTS='https://mcdostone.github.io/articles/first-time-arch-linux/assets'" > "$DIR/.env"
-
-    SSID=$(iwctl station wlan0 get-networks | grep '\*' | awk '{print $2}')
-    if [ ! -z "$SSID"] {
-        sed "s/SSID='XXX'/SSID='$SSID'/" "$DIR/.env"
-    }
+    if [ -v SSID ]; then
+        sed -i "s/SSID='XXX'/SSID='$SSID'/" "$DIR/.env"
+    fi
+    if [ -v WIFI_PASSPHRASE ]; then 
+        sed -i "s/WIFI_PASSPHRASE='XXX'/WIFI_PASSPHRASE='$WIFI_PASSPHRASE'/" "$DIR/.env"
+    fi
     exit 0
 fi
-
 
 # Load env variables in .env
 export $(xargs < "$DIR/.env")
@@ -43,6 +43,7 @@ download "$URL_SCRIPTS/startup.sh" "$DIR/startup.sh"
 
 # Azerty keyboard
 loadkeys fr-latin1
+chmod 755 "$DIR/startup.sh" "$DIR/chrrot.sh"
 
 # Connect to the Internet
 iwctl station wlan0 connect "$SSID" --passphrase "$WIFI_PASSPHRASE"
