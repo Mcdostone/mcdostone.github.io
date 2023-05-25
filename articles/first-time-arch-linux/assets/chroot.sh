@@ -6,7 +6,7 @@ set -xeuo pipefail
 sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/' /etc/pacman.conf
 
 # Install base packages
-pacman --noconfirm -S iwd curl iputils vim dhcpcd sudo base-devel git man nvidia bluez bluez-utils alsa-tools pulseaudio alsa-utils
+pacman --noconfirm -S iwd curl iputils vim dhcpcd sudo base-devel git man nvidia bluez bluez-utils alsa-tools pulseaudio alsa-utils ttf-fira-code
 systemctl enable iwd
 systemctl start iwd
 systemctl enable dhcpcd
