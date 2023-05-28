@@ -23,6 +23,7 @@ ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 # Sync time
 hwclock --systohc
+timedatectl set-ntp true
 
 # Select locales
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /etc/locale.gen

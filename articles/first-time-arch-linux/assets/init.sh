@@ -50,7 +50,7 @@ iwctl station wlan0 connect "$SSID" --passphrase "$WIFI_PASSPHRASE"
 
 # Sync time and hardware clock
 timedatectl
-timedatectl set-ntp 1
+timedatectl set-ntp true
 hwclock -w
 
 # Umount /mnt if already mounted and disable swapping
