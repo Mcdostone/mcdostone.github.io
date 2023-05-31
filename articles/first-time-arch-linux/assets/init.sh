@@ -65,7 +65,7 @@ printf "%s" "$partitions" | xargs -t -I {} bash -c "printf 'd\n{}\nw\n' | fdisk 
 sleep 1
 partprobe
 ## Boot partition
-printf 'g\nn\n\n\n+300m\ny\nw\n' | fdisk "$DISK"
+printf 'g\nn\n\n\n+1g\ny\nw\n' | fdisk "$DISK"
 sleep 1
 printf 't\n1\nw\n' | fdisk "$DISK"
 
