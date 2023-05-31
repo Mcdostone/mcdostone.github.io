@@ -13,6 +13,11 @@ function download {
     fi
 }
 
+# Download missing scripts
+download "$URL_SCRIPTS/init.sh" "$DIR/init.sh"
+download "$URL_SCRIPTS/chroot.sh" "$DIR/chroot.sh"
+download "$URL_SCRIPTS/startup.sh" "$DIR/startup.sh"
+
 # Generate default .env file
 if [ ! -f "$DIR/.env" ]; then
     printf "Create %s\n" "$DIR/.env"
@@ -36,21 +41,15 @@ fi
 # Load env variables in .env
 export $(xargs < "$DIR/.env")
 
-# Download missing scripts
-download "$URL_SCRIPTS/init.sh" "$DIR/init.sh"
-download "$URL_SCRIPTS/chroot.sh" "$DIR/chroot.sh"
-download "$URL_SCRIPTS/startup.sh" "$DIR/startup.sh"
-
 # Azerty keyboard
 loadkeys fr-latin1
-chmod 755 "$DIR/startup.sh" "$DIR/chrrot.sh"
+chmod 755 "$DIR/startup.sh" "$DIR/chroot.sh"
 
 # Connect to the Internet
 iwctl station wlan0 connect "$SSID" --passphrase "$WIFI_PASSPHRASE"
 
 # Sync time and hardware clock
 timedatectl
-timedatectl set-ntp true
 hwclock -w
 
 # Umount /mnt if already mounted and disable swapping

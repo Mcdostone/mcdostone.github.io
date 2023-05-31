@@ -22,6 +22,7 @@ nmcli device wifi connect "$SSID" password "$WIFI_PASSPHRASE"
 yay --save --answerclean All --answerdiff None
 yay -Sy --noconfirm python-pip systemd-numlockontty 
 sudo systemctl enable numLockOnTty
+timedatectl set-ntp true
 
 cd /tmp
 # Install bitwareden and ublock-origin
