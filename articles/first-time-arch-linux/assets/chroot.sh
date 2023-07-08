@@ -58,15 +58,15 @@ echo -e "NoDisplay=true" | tee -a /usr/share/applications/org.gnome.Epiphany.des
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/qv4l2.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/org.gnome.Console.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/avahi-discover.desktop
-echo -e "NoDisplay=true" | tee -a /usr/share/applications/envy24control.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/bvnc.desktop
+echo -e "NoDisplay=true" | tee -a /usr/share/applications/bssh.desktop
+echo -e "NoDisplay=true" | tee -a /usr/share/applications/envy24control.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/qvidcap.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/hdspconf.desktop 
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/hdspmixer.desktop 
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/hwmixvolume.desktop 
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/hdajackretask.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/yelp.desktop
-echo -e "NoDisplay=true" | tee -a /usr/share/applications/bssh.desktop
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/lstopo.desktop 
 echo -e "NoDisplay=true" | tee -a /usr/share/applications/fish.desktop 
 

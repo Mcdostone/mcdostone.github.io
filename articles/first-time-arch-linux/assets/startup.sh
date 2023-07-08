@@ -11,6 +11,7 @@ FULLNAME="###FULLNAME"
 # Configure git
 git config --global user.email "$EMAIL"
 git config --global user.name "$FULLNAME"
+git config --global init.defaultBranch main
 ssh-keygen -t ed25519 -C "$EMAIL" -f "$HOME/.ssh/id_ed25519" -N ""
 
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
@@ -38,6 +39,7 @@ git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git /tmp/icons
 cd /tmp/icons && bash install.sh
 rm -rf /tmp/icons
 yay --noconfirm -Sy apple_cursor apple-fonts
+git clone https://github.com/lucagoc/MacOSSounds4Gnome ~/.local/share/sounds/MacOSSounds4Gnome
 
 # Install oh-my-fish
 cd
@@ -73,6 +75,7 @@ gsettings set org.gnome.desktop.background picture-uri "file:///home/$USER/Pictu
 gsettings set org.gnome.desktop.background picture-uri-dark "file:///home/$USER/Pictures/wallpaper/1.jpg"
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
+gsettings set org.gnome.desktop.sound theme-name 'MacOSSounds4Gnome'
 gsettings set org.gnome.shell.extensions.user-theme name "Colloid-Light"
 gsettings set org.gnome.desktop.interface gtk-theme "Colloid-Light"
 gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,close"
@@ -152,6 +155,7 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/ set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/schemas/ set org.gnome.shell.extensions.dash-to-dock intellihide false
 gsettings set org.gnome.desktop.wm.preferences focus-new-windows 'smart'
+echo "inode/directory=org.gnome.Nautilus.desktop;" > ~/.config/mimeapps.list
 
 # Install volta.sh
 curl https://get.volta.sh | bash
