@@ -4,7 +4,7 @@
   <subtitle>My blog</subtitle>
   <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2023-07-31T00:05:30Z</updated>
+  <updated>2023-07-31T22:09:37Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
@@ -14,7 +14,7 @@
     <title></title>
     <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
     <id>https://mcdostone.github.io/assets/search.json</id>
-    <updated>2023-07-31T00:05:30Z</updated>
+    <updated>2023-07-31T22:09:37Z</updated>
     <summary type="text">
       
     </summary>
@@ -61,17 +61,6 @@
     <category term="Eleventy"/>
     <summary type="text">
       A lightweight build-time rendering Node.js syntax highlighter module based on Shiki.
-    </summary>
-  </entry>
-  <entry>
-    <title>My facebook feed is a nightmare</title>
-    <link rel="alternate" href="https://mcdostone.github.io/articles/my-facebook-feed-is-a-nightmare/"/>
-    <id>https://mcdostone.github.io/articles/my-facebook-feed-is-a-nightmare/</id>
-    <updated>2022-09-03T00:00:00Z</updated>
-    <category term="Facebook"/>
-    <category term="Meta"/>
-    <summary type="text">
-      A dream for those who like ads.
     </summary>
   </entry>
   <entry>
