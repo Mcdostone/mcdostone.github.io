@@ -1,12 +1,145 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"><title>Introduction to 3D in CSS | Yann Prono</title><script src="/assets/js/dark-123037b5.js" type="module"></script><link href="/assets/css/style-ee351ce2.css" rel="stylesheet"><link href="/assets/css/editor-ee5d2198.css" rel="stylesheet"><link href="/articles/intro-3d-css/assets/index-d3ab4d59.css" rel="stylesheet"><script src="/assets/js/search-5570d849.js" type="module"></script><meta content="Yann Prono" property="og:site_name"><meta content="en-us" property="og:locale"><meta content="article" property="og:type"><meta content="https://mcdostone.github.io/articles/intro-3d-css/" property="og:url"><meta content="Yann Prono" property="og:title"><meta content="https:/mcdostone.github.io/assets/images/og-image.jpg" property="og:image"><meta content="452" property="og:image:width"><meta content="452" property="og:image:height"><meta content="This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript." property="og:description"><meta content="summary" property="twitter:card"><meta content="https:/mcdostone.github.io/assets/images/og-image.jpg" property="twitter:image"><meta content="Yann Prono" property="twitter:title"><meta content="This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript." property="twitter:description"><meta content="same-origin" name="view-transition"><meta content="This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript." name="description"><link href="/favicon-cbb243b1c9.svg" rel="icon" type="image/svg+xml"><link href="https://mcdostone.github.io/index.xml" rel="alternate" type="application/atom+xml" title="Atom feed"><link href="https://pouet.chapril.org/@yannp" rel="me"></head><body><script>document.body.id = localStorage.getItem('theme')</script><header class="header"><div class="container"><div><a href="/" class="active">Blog</a> <a href="/recipes/">Recipes</a> <a href="/links/">Links</a></div><div><div class="theme-selector"><button aria-label="Open a dialog box to choose a theme" type="button" aria-haspopup="menu"><svg class="icon theme"><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-light"></use></svg></button><dialog><form method="dialog"><button aria-label="switch to OS theme" type="button" value="" aria-pressed="true"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-system"></use></svg> OS Default</button> <button aria-label="switch to light theme" type="button" value="light"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-light"></use></svg> Light</button> <button aria-label="switch to dark theme" type="button" value="dark"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-dark"></use></svg> Dark</button></form></dialog></div><button id="search-button"><svg class="icon search"><use href="/assets/images/icons-e5ccfc7d9b.svg#search"></use></svg> <span>⌘ K</span></button></div></div></header><dialog data-endpoint="/assets/search.json" id="search-dialog"><form class="search-topbar"><label for="search"><svg class="icon search"><use href="/assets/images/icons-e5ccfc7d9b.svg#search"></use></svg></label> <input id="search" type="search" autocomplete="off" autofocus placeholder="Search for articles, recipes, links"> <button aria-label="close" class="search-cancel" formmethod="dialog">Cancel</button></form><ul class="results"></ul></dialog><main class="content-container"><article><header><h1>Introduction to 3D in CSS</h1><div class="article-metadata"><time class="article-published-on" datetime="2022-07-21">July 21, 2022</time></div></header><div class="demo"><div><div class="creeper"><picture style="--pc: #65ab5c" class="side front"><source sizes="120px" srcset="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.jpeg" width="120"></picture><picture style="--pc: #71c167" class="side back"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120"></picture><picture style="--pc: #71c167" class="side top"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120"></picture><picture style="--pc: #71c167" class="side bottom"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120"></picture><picture style="--pc: #71c167" class="side left"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120"></picture><picture style="--pc: #71c167" class="side right"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120"></picture></div></div><q class="help">H E L P !</q></div><p>This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript. This article is composed of 2 parts:</p><ol><li><p>Modeling a Minecraft creeper head.</p></li><li><p>Making the creeper alive.</p></li></ol><div class="heading"><h2 id="modeling-the-cube">Modeling the cube</h2><a href="#modeling-the-cube" aria-label="Section titled Modeling the cube" class="header-anchor"><span></span></a></div><p>Modeling the creeper head is like modeling a cube. I use 2 assets:</p><ul><li><p>The face of the creeper, <code>face.avif</code></p></li><li><p>The side of his head, <code>side.avif</code></p></li></ul><p><a href="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.avif" aria-label="download face.webp" class="asset"><picture style="--pc: #65ab5c"><source sizes="120px" srcset="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.jpeg" width="120" loading="lazy"></picture></a><a href="/articles/intro-3d-css/assets/side-WygM7n4con.avif" aria-label="download side.webp" class="asset"><picture style="--pc: #71c167"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture></a></p><p>Each side of the cube is represented by an <code>img</code> tag and is nested in a <code>div</code> element. We need 6 images for the 6 square faces:</p><figure class="code-snippet"><span class="language-tag">HTML</span><pre><code class="code-block-inner"><span><span class="h10">&lt;</span><span class="h01">div</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"creeper"</span><span class="h10">></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"face.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side front"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side back"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side top"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side bottom"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side left"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side right"</span><span class="h10"> /></span></span>
-<span><span class="h10">&lt;/</span><span class="h01">div</span><span class="h10">></span></span>
-<span></span></code></pre></figure><p>By default, HTML elements are positioned in a two-dimensional space, meaning that everything is <code>flat</code>.</p><figure class="border"><div class="cube-in-space"><div class="creeper"><span class="axis x"></span> <span class="axis y"></span><picture style="--pc: #65ab5c" class="side front"><source sizes="120px" srcset="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.jpeg" width="120" loading="lazy"></picture></div></div><figcaption>Is it a menacing flat mouth or a hairy moustache?</figcaption></figure><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style"><code>transform-style</code></a> is a CSS property indicating the way children elements are positioned in the space. With the keyword <code>preserve-3d</code>, we unlock the Z dimension and add some depth to the page. We can now position elements relative to the X, Y and Z axis. The CSS function <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateZ"><code>translateZ</code></a> position an element closer or farther away from the viewer:</p><figure class="code-snippet"><span class="language-tag">CSS</span><pre><code class="code-block-inner"><span><span class="h02">.creeper</span><span class="h10"> {</span></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Introduction to 3D in CSS | Yann Prono</title>
+  <script type="module" src="/assets/js/dark.ts"></script>
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/editor.css" rel="stylesheet">
+  <link href="/articles/intro-3d-css/assets/index.css" rel="stylesheet">
+  <script type="module" src="/assets/js/search.ts"></script>
+  <meta property="og:site_name" content="Yann Prono">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mcdostone.github.io/articles/intro-3d-css/">
+  <meta property="og:title" content="Yann Prono">
+  <meta property="og:image" content="https:/mcdostone.github.io/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="452">
+  <meta property="og:image:height" content="452">
+  <meta property="og:description" content="This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript.">
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:image" content="https:/mcdostone.github.io/assets/images/og-image.jpg">
+  <meta property="twitter:title" content="Yann Prono">
+  <meta property="twitter:description" content="This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript.">
+  <meta name="view-transition" content="same-origin" >
+  <meta name="description" content="This article is a modest introduction to 3D in CSS through an example. I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link href="https://mcdostone.github.io/index.xml" type="application/atom+xml" rel="alternate" title="Atom feed">
+  <link rel="me" href="https://pouet.chapril.org/@yannp">
+</head>
+<body >
+<script>document.body.id = localStorage.getItem('theme')</script>
+<header class="header">
+  <div class="container">
+    <div>
+      <a href="/" class="active">Blog</a>
+      <a href="/recipes/" >Recipes</a>
+      <a href="/links/" >Links</a>
+    </div>
+    <div>
+      <div class="theme-selector">
+        <button aria-label="Open a dialog box to choose a theme" aria-haspopup="menu" type="button">
+          <svg class="icon theme">
+            <use href="/assets/images/icons.svg#theme-light" />
+          </svg>
+        </button>
+        <dialog>
+          <form method="dialog">
+            <button aria-label="switch to OS theme" type="button" aria-pressed="true" value="">
+              <svg>
+                <use href="/assets/images/icons.svg#theme-system" />
+              </svg>
+              OS Default
+            </button>
+            <button aria-label="switch to light theme" type="button" value="light">
+              <svg>
+                <use href="/assets/images/icons.svg#theme-light" />
+              </svg>
+              Light
+            </button>
+            <button aria-label="switch to dark theme" type="button" value="dark">
+              <svg>
+                <use href="/assets/images/icons.svg#theme-dark" />
+              </svg>
+              Dark
+            </button>
+          </form>
+        </dialog>
+      </div>
+      <button id="search-button">
+        <svg class="icon search">
+          <use href="/assets/images/icons.svg#search" />
+        </svg>
+        <span>⌘ K</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog data-endpoint="/assets/search.json" id="search-dialog">
+  <form class="search-topbar">
+    <label for="search"><svg class="icon search">
+        <use href="/assets/images/icons.svg#search" />
+      </svg></label>
+    <input autocomplete="off" autofocus type="search" id="search" placeholder="Search for articles, recipes, links">
+    <button class="search-cancel" aria-label="close" formmethod="dialog">Cancel</button>
+  </form>
+  <ul class="results">
+  </ul>
+</dialog>
+
+  <main class="content-container">
+<article>
+  <header>
+    <h1>Introduction to 3D in CSS</h1>
+    <div class="article-metadata">
+    <time class="article-published-on" datetime="2022-07-21">July 21, 2022</time>
+    </div>
+  </header>
+  <div class="demo"><div>
+  <div class="creeper">
+    <img data-no-lazy src="./assets/face.webp" alt="" class="side front">
+    <img data-no-lazy src="./assets/side.webp" alt="" class="side back">
+    <img data-no-lazy src="./assets/side.webp" alt="" class="side top">
+    <img data-no-lazy src="./assets/side.webp" alt="" class="side bottom">
+    <img data-no-lazy src="./assets/side.webp" alt="" class="side left">
+    <img data-no-lazy src="./assets/side.webp" alt="" class="side right">
+    </div>
+  </div>
+  <q class="help"> H E L P ! </q>
+</div>
+<p>This article is a modest introduction to 3D in CSS through an example.
+I share with you how I made a Minecraft creeper head in CSS and animated it with JavaScript. This article is composed of 2 parts:</p><ol>
+<li><p>Modeling a Minecraft creeper head.</p></li>
+<li><p>Making the creeper alive.</p></li>
+</ol>
+<div class="heading">
+<h2 id="modeling-the-cube">Modeling the cube</h2>
+<a class="header-anchor" href="#modeling-the-cube" aria-label="Section titled Modeling the cube"><span></span></a></div>
+<p>Modeling the creeper head is like modeling a cube. I use 2 assets:</p><ul>
+<li><p>The face of the creeper, <code>face.avif</code></p></li>
+<li><p>The side of his head, <code>side.avif</code></p></li>
+</ul>
+<p><a class="asset" aria-label="download face.webp" href="/articles/intro-3d-css/assets/face.webp"><img src="/articles/intro-3d-css/assets/face.webp" alt=""></a><a class="asset" aria-label="download side.webp" href="/articles/intro-3d-css/assets/side.webp"><img src="/articles/intro-3d-css/assets/side.webp" alt=""></a></p><p>Each side of the cube is represented by an <code>img</code> tag and is nested in a <code>div</code> element. We need 6 images for the 6 square faces:</p><figure class="code-snippet"><span class="language-tag">HTML</span><pre><code class="code-block-inner"><span><span class="h10">&lt;</span><span class="h01">div</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;creeper&quot;</span><span class="h10">&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;face.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side front&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side back&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side top&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side bottom&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side left&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side right&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">&lt;/</span><span class="h01">div</span><span class="h10">&gt;</span></span>
+<span></span></code></pre>
+</figure><p>By default, HTML elements are positioned in a two-dimensional space, meaning that everything is <code>flat</code>.</p><figure class="border">
+<div class="cube-in-space">
+  <div class="creeper">
+    <span class="axis x"></span>
+    <span class="axis y"></span>
+    <img src="./assets/face.webp" alt="" class="side front">
+  </div>
+</div>
+<figcaption>Is it a menacing flat mouth or a hairy moustache?</figcaption></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style"><code>transform-style</code></a> is a CSS property indicating the way children elements are positioned in the space. With the keyword <code>preserve-3d</code>, we unlock the Z dimension and add some depth to the page. We can now position elements relative to the X, Y and Z axis. The CSS function <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateZ"><code>translateZ</code></a> position an element closer or farther away from the viewer:</p><figure class="code-snippet"><span class="language-tag">CSS</span><pre><code class="code-block-inner"><span><span class="h02">.creeper</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h08">--size</span><span class="h10">: </span><span class="h03">128</span><span class="h09">px</span><span class="h10">;</span></span>
 <span><span>  </span><span class="h08">--half-size</span><span class="h10">: </span><span class="h03">calc</span><span class="h10">(</span><span class="h03">var</span><span class="h10">(</span><span class="h08">--size</span><span class="h10">) </span><span class="h09">/</span><span> </span><span class="h03">2</span><span class="h10">);</span></span>
 <span></span>
@@ -41,15 +174,53 @@
 <span><span class="h02">.right</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h03">transform</span><span class="h10">: </span><span class="h03">translateX</span><span class="h10">(</span><span class="h03">var</span><span class="h10">(</span><span class="h08">--half-size</span><span class="h10">)) </span><span class="h03">rotateY</span><span class="h10">(</span><span class="h03">90</span><span class="h09">deg</span><span class="h10">);</span></span>
 <span><span class="h10">}</span></span>
-<span></span></code></pre></figure><p>The following figure can help you understand how the elements are positioned in the 3D space:</p><figure class="border"><div class="cube-in-space animated"><span>Hover me <span class="hover-me">✋</span></span><div class="creeper"><span class="axis x"></span> <span class="axis y"></span> <span class="axis z"></span><picture style="--pc: #65ab5c" class="side front"><source sizes="120px" srcset="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side back"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side top"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side bottom"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side left"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side right"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture></div></div><figcaption></figcaption></figure><div class="heading"><h2 id="bringing-the-cube-to-life">Bringing the cube to life</h2><a href="#bringing-the-cube-to-life" aria-label="Section titled Bringing the cube to life" class="header-anchor"><span></span></a></div><p>This part is optional. The modeling is over, good job Jackson<a href="https://www.youtube.com/watch?v=HW7hN4NI4n0&t=51s">.</a> The character looks very static though: I would like him to follow the cursor for more user interaction. To do so, we need to compute 2 angles. Once calculated, we can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateX"><code>rotateX</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateY"><code>rotateY</code></a> to position the cube relative to the axis of rotation X and Y. It has to be done in JavaScript:</p><div class="demo-3"><div class="creeper" id="demo"><picture style="--pc: #65ab5c" class="side front"><source sizes="120px" srcset="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/face-GAWOCXT8Fe.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side back"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side top"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side bottom"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side right"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture><picture style="--pc: #71c167" class="side left"><source sizes="120px" srcset="/articles/intro-3d-css/assets/side-WygM7n4con.avif 120w" type="image/avif"><img alt="" decoding="async" height="120" src="/articles/intro-3d-css/assets/side-WygM7n4con.jpeg" width="120" loading="lazy"></picture></div></div><div class="editor tabs" style="--height: 924px"><div class="editor-container" role="tablist"><div class="tab"><input id="tab-0" type="radio" aria-roledescription="tab" name="tab-group-0" checked> <label for="tab-0">creeper.html</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h10">&lt;</span><span class="h01">div</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"creeper"</span><span> </span><span class="h02">id</span><span class="h10">=</span><span class="h00">"demo"</span><span class="h10">></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"face.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side front"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side back"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side top"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side bottom"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side right"</span><span class="h10"> /></span></span>
-<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">"side.avif"</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">""</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"side left"</span><span class="h10"> /></span></span>
-<span><span class="h10">&lt;/</span><span class="h01">div</span><span class="h10">></span></span>
-<span></span></code></pre></div><div class="tab"><input id="tab-1" type="radio" aria-roledescription="tab" name="tab-group-0"> <label for="tab-1">style.css</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h02">.creeper</span><span class="h10"> {</span></span>
+<span></span></code></pre>
+</figure><p>The following figure can help you understand how the elements are positioned in the 3D space:</p><figure class="border">
+<div class="cube-in-space animated">
+  <span>Hover me <span class="hover-me">✋</span></span>
+  <div class="creeper">
+    <span class="axis x"></span>
+    <span class="axis y"></span>
+    <span class="axis z"></span>
+    <img src="./assets/face.webp" alt="" class="side front">
+    <img src="./assets/side.webp" alt="" class="side back">
+    <img src="./assets/side.webp" alt="" class="side top">
+    <img src="./assets/side.webp" alt="" class="side bottom">
+    <img src="./assets/side.webp" alt="" class="side left">
+    <img src="./assets/side.webp" alt="" class="side right">
+  </div>
+</div>
+<figcaption></figcaption></figure>
+<div class="heading">
+<h2 id="bringing-the-cube-to-life">Bringing the cube to life</h2>
+<a class="header-anchor" href="#bringing-the-cube-to-life" aria-label="Section titled Bringing the cube to life"><span></span></a></div>
+<p>This part is optional. The modeling is over, good job Jackson<a href="https://www.youtube.com/watch?v=HW7hN4NI4n0&amp;t=51s">.</a> The character looks very static though: I would like him to follow the cursor for more user interaction.
+To do so, we need to compute 2 angles. Once calculated, we can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateX"><code>rotateX</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateY"><code>rotateY</code></a> to position the cube relative to the axis of rotation X and Y. It has to be done in JavaScript:</p><div class="demo-3">
+  <div class="creeper" id="demo">
+    <img src="./assets/face.webp" alt="" class="side front">
+    <img src="./assets/side.webp" alt="" class="side back">
+    <img src="./assets/side.webp" alt="" class="side top">
+    <img src="./assets/side.webp" alt="" class="side bottom">
+    <img src="./assets/side.webp" alt="" class="side right">
+    <img src="./assets/side.webp" alt="" class="side left">
+  </div>
+</div>
+<div class="editor tabs" style="--height: 924px"><div class="editor-container" role="tablist"><div class="tab">
+    <input type="radio" aria-roledescription="tab" id="tab-0" name="tab-group-0" checked>
+    <label for="tab-0">creeper.html</label>
+    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h10">&lt;</span><span class="h01">div</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;creeper&quot;</span><span> </span><span class="h02">id</span><span class="h10">=</span><span class="h00">&quot;demo&quot;</span><span class="h10">&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;face.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side front&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side back&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side top&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side bottom&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side right&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">  &lt;</span><span class="h01">img</span><span> </span><span class="h02">src</span><span class="h10">=</span><span class="h00">&quot;side.avif&quot;</span><span> </span><span class="h02">alt</span><span class="h10">=</span><span class="h00">&quot;&quot;</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;side left&quot;</span><span class="h10"> /&gt;</span></span>
+<span><span class="h10">&lt;/</span><span class="h01">div</span><span class="h10">&gt;</span></span>
+<span></span></code></pre>
+  </div><div class="tab">
+    <input type="radio" aria-roledescription="tab" id="tab-1" name="tab-group-0" >
+    <label for="tab-1">style.css</label>
+    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h02">.creeper</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h08">--size</span><span class="h10">: </span><span class="h03">128</span><span class="h09">px</span><span class="h10">;</span></span>
 <span><span>  </span><span class="h08">--half-size</span><span class="h10">: </span><span class="h03">calc</span><span class="h10">(</span><span class="h03">var</span><span class="h10">(</span><span class="h08">--size</span><span class="h10">) </span><span class="h09">/</span><span> </span><span class="h03">2</span><span class="h10">);</span></span>
 <span></span>
@@ -92,27 +263,31 @@
 <span><span class="h02">.right</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h03">transform</span><span class="h10">: </span><span class="h03">translateX</span><span class="h10">(</span><span class="h03">var</span><span class="h10">(</span><span class="h08">--half-size</span><span class="h10">)) </span><span class="h03">rotateY</span><span class="h10">(</span><span class="h03">90</span><span class="h09">deg</span><span class="h10">);</span></span>
 <span><span class="h10">}</span></span>
-<span></span></code></pre></div><div class="tab"><input id="tab-2" type="radio" aria-roledescription="tab" name="tab-group-0"> <label for="tab-2">app.ts</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h09">type</span><span> </span><span class="h02">Options</span><span> </span><span class="h09">=</span><span class="h10"> {</span></span>
+<span></span></code></pre>
+  </div><div class="tab">
+    <input type="radio" aria-roledescription="tab" id="tab-2" name="tab-group-0" >
+    <label for="tab-2">app.ts</label>
+    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h09">type</span><span> </span><span class="h02">Options</span><span> </span><span class="h09">=</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h08">maxAngleX</span><span class="h09">:</span><span> </span><span class="h03">number</span></span>
 <span><span>  </span><span class="h08">maxAngleY</span><span class="h09">:</span><span> </span><span class="h03">number</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
-<span><span class="h09">const</span><span> </span><span class="h02">map</span><span> </span><span class="h09">=</span><span class="h10"> (</span><span class="h08">value</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">low1</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">high1</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">low2</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">high2</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">) </span><span class="h09">=></span><span class="h10"> low2 </span><span class="h09">+</span><span class="h10"> ((high2 </span><span class="h09">-</span><span class="h10"> low2) </span><span class="h09">*</span><span class="h10"> (value </span><span class="h09">-</span><span class="h10"> low1)) </span><span class="h09">/</span><span class="h10"> (high1 </span><span class="h09">-</span><span class="h10"> low1)</span></span>
+<span><span class="h09">const</span><span> </span><span class="h02">map</span><span> </span><span class="h09">=</span><span class="h10"> (</span><span class="h08">value</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">low1</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">high1</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">low2</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">high2</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">) </span><span class="h09">=&gt;</span><span class="h10"> low2 </span><span class="h09">+</span><span class="h10"> ((high2 </span><span class="h09">-</span><span class="h10"> low2) </span><span class="h09">*</span><span class="h10"> (value </span><span class="h09">-</span><span class="h10"> low1)) </span><span class="h09">/</span><span class="h10"> (high1 </span><span class="h09">-</span><span class="h10"> low1)</span></span>
 <span></span>
 <span><span class="h09">function</span><span> </span><span class="h02">rotate</span><span class="h10">(</span><span class="h08">element</span><span class="h09">:</span><span> </span><span class="h02">HTMLElement</span><span class="h10">, </span><span class="h08">angleX</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">, </span><span class="h08">angleY</span><span class="h09">:</span><span> </span><span class="h03">number</span><span class="h10">)</span><span class="h09">:</span><span> </span><span class="h03">void</span><span class="h10"> {</span></span>
-<span><span class="h10">  element.style.</span><span class="h02">setProperty</span><span class="h10">(</span><span class="h00">'--angle-x'</span><span class="h10">, </span><span class="h00">`${</span><span class="h10">angleX</span><span class="h00">}deg`</span><span class="h10">)</span></span>
-<span><span class="h10">  element.style.</span><span class="h02">setProperty</span><span class="h10">(</span><span class="h00">'--angle-y'</span><span class="h10">, </span><span class="h00">`${</span><span class="h10">angleY</span><span class="h00">}deg`</span><span class="h10">)</span></span>
+<span><span class="h10">  element.style.</span><span class="h02">setProperty</span><span class="h10">(</span><span class="h00">&apos;--angle-x&apos;</span><span class="h10">, </span><span class="h00">`${</span><span class="h10">angleX</span><span class="h00">}deg`</span><span class="h10">)</span></span>
+<span><span class="h10">  element.style.</span><span class="h02">setProperty</span><span class="h10">(</span><span class="h00">&apos;--angle-y&apos;</span><span class="h10">, </span><span class="h00">`${</span><span class="h10">angleY</span><span class="h00">}deg`</span><span class="h10">)</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
 <span><span class="h09">function</span><span> </span><span class="h02">handleOrientation</span><span class="h10">(</span><span class="h08">element</span><span class="h09">:</span><span> </span><span class="h02">HTMLElement</span><span class="h10">, </span><span class="h08">options</span><span class="h09">:</span><span> </span><span class="h02">Options</span><span class="h10">)</span><span class="h09">:</span><span> </span><span class="h03">void</span><span class="h10"> {</span></span>
-<span><span class="h10">  window.</span><span class="h02">addEventListener</span><span class="h10">(</span><span class="h00">'deviceorientation'</span><span class="h10">, (</span><span class="h08">event</span><span class="h09">:</span><span> </span><span class="h02">DeviceOrientationEvent</span><span class="h10">) </span><span class="h09">=></span><span class="h10"> {</span></span>
+<span><span class="h10">  window.</span><span class="h02">addEventListener</span><span class="h10">(</span><span class="h00">&apos;deviceorientation&apos;</span><span class="h10">, (</span><span class="h08">event</span><span class="h09">:</span><span> </span><span class="h02">DeviceOrientationEvent</span><span class="h10">) </span><span class="h09">=&gt;</span><span class="h10"> {</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">decY</span><span> </span><span class="h09">=</span><span> </span><span class="h02">map</span><span class="h10">((event.gamma </span><span class="h09">||</span><span> </span><span class="h03">0</span><span class="h10">) </span><span class="h09">+</span><span> </span><span class="h03">180</span><span class="h10">, </span><span class="h03">0</span><span class="h10">, </span><span class="h03">360</span><span class="h10">, </span><span class="h09">-</span><span class="h10">options.maxAngleY, options.maxAngleY)</span></span>
 <span><span>    </span><span class="h02">rotate</span><span class="h10">(element, </span><span class="h03">0</span><span class="h10">, </span><span class="h09">-</span><span class="h10">decY)</span></span>
 <span><span class="h10">  })</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
 <span><span class="h09">function</span><span> </span><span class="h02">handleCursor</span><span class="h10">(</span><span class="h08">element</span><span class="h09">:</span><span> </span><span class="h02">HTMLElement</span><span class="h10">, </span><span class="h08">options</span><span class="h09">:</span><span> </span><span class="h02">Options</span><span class="h10">)</span><span class="h09">:</span><span> </span><span class="h03">void</span><span class="h10"> {</span></span>
-<span><span class="h10">  window.</span><span class="h02">addEventListener</span><span class="h10">(</span><span class="h00">'mousemove'</span><span class="h10">, (</span><span class="h08">event</span><span class="h09">:</span><span> </span><span class="h02">MouseEvent</span><span class="h10">) </span><span class="h09">=></span><span class="h10"> {</span></span>
+<span><span class="h10">  window.</span><span class="h02">addEventListener</span><span class="h10">(</span><span class="h00">&apos;mousemove&apos;</span><span class="h10">, (</span><span class="h08">event</span><span class="h09">:</span><span> </span><span class="h02">MouseEvent</span><span class="h10">) </span><span class="h09">=&gt;</span><span class="h10"> {</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">elementRect</span><span> </span><span class="h09">=</span><span class="h10"> element.</span><span class="h02">getBoundingClientRect</span><span class="h10">()</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">originX</span><span> </span><span class="h09">=</span><span class="h10"> elementRect.left </span><span class="h09">+</span><span class="h10"> elementRect.width </span><span class="h09">/</span><span> </span><span class="h03">2</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">originY</span><span> </span><span class="h09">=</span><span class="h10"> elementRect.top </span><span class="h09">+</span><span class="h10"> elementRect.height </span><span class="h09">/</span><span> </span><span class="h03">2</span></span>
@@ -124,12 +299,46 @@
 <span><span class="h10">  })</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
-<span><span class="h09">const</span><span> </span><span class="h03">creeper</span><span> </span><span class="h09">=</span><span class="h10"> document.</span><span class="h02">querySelector</span><span class="h10">(</span><span class="h00">'#demo'</span><span class="h10">) </span><span class="h09">as</span><span> </span><span class="h02">HTMLElement</span></span>
+<span><span class="h09">const</span><span> </span><span class="h03">creeper</span><span> </span><span class="h09">=</span><span class="h10"> document.</span><span class="h02">querySelector</span><span class="h10">(</span><span class="h00">&apos;#demo&apos;</span><span class="h10">) </span><span class="h09">as</span><span> </span><span class="h02">HTMLElement</span></span>
 <span><span class="h09">const</span><span> </span><span class="h03">options</span><span class="h09">:</span><span> </span><span class="h02">Options</span><span> </span><span class="h09">=</span><span class="h10"> { maxAngleX: </span><span class="h03">40</span><span class="h10">, maxAngleY: </span><span class="h03">20</span><span class="h10"> }</span></span>
 <span><span class="h04">// For touch screens</span></span>
-<span><span class="h09">if</span><span class="h10"> (window.DeviceOrientationEvent </span><span class="h09">&&</span><span> </span><span class="h00">'ontouchstart'</span><span> </span><span class="h09">in</span><span class="h10"> window) {</span></span>
+<span><span class="h09">if</span><span class="h10"> (window.DeviceOrientationEvent </span><span class="h09">&amp;&amp;</span><span> </span><span class="h00">&apos;ontouchstart&apos;</span><span> </span><span class="h09">in</span><span class="h10"> window) {</span></span>
 <span><span>  </span><span class="h02">handleOrientation</span><span class="h10">(creeper, Object.</span><span class="h02">assign</span><span class="h10">({}, options, { maxAngleY: </span><span class="h03">80</span><span class="h10"> }))</span></span>
 <span><span class="h10">} </span><span class="h09">else</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h02">handleCursor</span><span class="h10">(creeper, options)</span></span>
 <span><span class="h10">}</span></span>
-<span></span></code></pre></div></div></div><script>const map=(e,n,t,o,i)=>o+(i-o)*(e-n)/(t-n);function rotate(e,n,t){e.style.setProperty("--angle-x",`${n}deg`),e.style.setProperty("--angle-y",`${t}deg`)}function handleOrientation(e,n){window.addEventListener("deviceorientation",(t=>{const o=map((t.gamma||0)+180,0,360,-n.maxAngleY,n.maxAngleY);rotate(e,0,-o)}))}function handleCursor(e,n){window.addEventListener("mousemove",(t=>{const o=e.getBoundingClientRect(),i=o.left+o.width/2,a=o.top+o.height/2,r=window.innerWidth,d=window.innerHeight,l=map(t.clientY-a,-d/2,d/2,-n.maxAngleY,n.maxAngleY),c=map(t.clientX-i,-r/2,r/2,-n.maxAngleX,n.maxAngleX);rotate(e,-l,c)}))}const creeper=document.querySelector("#demo"),options={maxAngleX:40,maxAngleY:20};window.DeviceOrientationEvent&&"ontouchstart"in window?handleOrientation(creeper,Object.assign({},options,{maxAngleY:80})):handleCursor(creeper,options);</script></article></main><footer class="container"><div class="social-networks"><a href="/index.xml" aria-label="RSS feed"><svg class="icon rss"><use href="/assets/images/icons-e5ccfc7d9b.svg#rss"></use></svg> </a><a href="https://github.com/mcdostone" aria-label="github profile" rel="noopener noreferrer" target="_blank"><svg class="icon github"><use href="/assets/images/icons-e5ccfc7d9b.svg#github"></use></svg> </a><a href="https://pouet.chapril.org/@yannp" aria-label="Mastodon" rel="noopener noreferrer" target="_blank"><svg class="icon mastodon"><use href="/assets/images/icons-e5ccfc7d9b.svg#mastodon"></use></svg> </a><a href="https://www.root-me.org/Mcdostone" aria-label="Root-me" rel="noopener noreferrer" target="_blank"><svg class="icon root-me"><use href="/assets/images/icons-e5ccfc7d9b.svg#root-me"></use></svg></a></div></footer></body></html>
+<span></span></code></pre>
+  </div></div></div>
+<script>
+const map=(e,n,t,o,i)=>o+(i-o)*(e-n)/(t-n);function rotate(e,n,t){e.style.setProperty("--angle-x",`${n}deg`),e.style.setProperty("--angle-y",`${t}deg`)}function handleOrientation(e,n){window.addEventListener("deviceorientation",(t=>{const o=map((t.gamma||0)+180,0,360,-n.maxAngleY,n.maxAngleY);rotate(e,0,-o)}))}function handleCursor(e,n){window.addEventListener("mousemove",(t=>{const o=e.getBoundingClientRect(),i=o.left+o.width/2,a=o.top+o.height/2,r=window.innerWidth,d=window.innerHeight,l=map(t.clientY-a,-d/2,d/2,-n.maxAngleY,n.maxAngleY),c=map(t.clientX-i,-r/2,r/2,-n.maxAngleX,n.maxAngleX);rotate(e,-l,c)}))}const creeper=document.querySelector("#demo"),options={maxAngleX:40,maxAngleY:20};window.DeviceOrientationEvent&&"ontouchstart"in window?handleOrientation(creeper,Object.assign({},options,{maxAngleY:80})):handleCursor(creeper,options);
+</script>
+
+</article>
+</main>
+<footer class="container">
+  <div class="social-networks">
+    <a aria-label="RSS feed" href="/index.xml">
+  <svg class="icon rss">
+    <use href="/assets/images/icons.svg#rss" />
+  </svg>
+</a>
+<a aria-label="github profile" target="_blank" rel="noopener noreferrer" href="https://github.com/mcdostone">
+  <svg class="icon github">
+    <use href="/assets/images/icons.svg#github" />
+  </svg>
+</a>
+<a aria-label="Mastodon" target="_blank" rel="noopener noreferrer" href="https://pouet.chapril.org/@yannp">
+  <svg class="icon mastodon">
+    <use href="/assets/images/icons.svg#mastodon" />
+  </svg>
+</a>
+<a aria-label="Root-me" target="_blank" rel="noopener noreferrer" href="https://www.root-me.org/Mcdostone">
+  <svg class="icon root-me">
+    <use href="/assets/images/icons.svg#root-me" />
+  </svg>
+</a>
+
+  </div>
+</footer>
+</body>
+</html>

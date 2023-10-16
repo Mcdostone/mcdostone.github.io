@@ -1,28 +1,128 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"><title>Self-Documented Makefile V1.1 | Yann Prono</title><script src="/assets/js/dark-123037b5.js" type="module"></script><link href="/assets/css/style-ee351ce2.css" rel="stylesheet"><script src="/assets/js/search-5570d849.js" type="module"></script><meta content="Yann Prono" property="og:site_name"><meta content="en-us" property="og:locale"><meta content="article" property="og:type"><meta content="https://mcdostone.github.io/articles/self-documented-makefile-v1-1/" property="og:url"><meta content="Yann Prono" property="og:title"><meta content="https:/mcdostone.github.io/assets/images/og-image.jpg" property="og:image"><meta content="452" property="og:image:width"><meta content="452" property="og:image:height"><meta content="A trick to print Makefile variables and their values." property="og:description"><meta content="summary" property="twitter:card"><meta content="https:/mcdostone.github.io/assets/images/og-image.jpg" property="twitter:image"><meta content="Yann Prono" property="twitter:title"><meta content="A trick to print Makefile variables and their values." property="twitter:description"><meta content="same-origin" name="view-transition"><meta content="A trick to print Makefile variables and their values." name="description"><link href="/favicon-cbb243b1c9.svg" rel="icon" type="image/svg+xml"><link href="https://mcdostone.github.io/index.xml" rel="alternate" type="application/atom+xml" title="Atom feed"><link href="https://pouet.chapril.org/@yannp" rel="me"></head><body><script>document.body.id = localStorage.getItem('theme')</script><header class="header"><div class="container"><div><a href="/" class="active">Blog</a> <a href="/recipes/">Recipes</a> <a href="/links/">Links</a></div><div><div class="theme-selector"><button aria-label="Open a dialog box to choose a theme" type="button" aria-haspopup="menu"><svg class="icon theme"><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-light"></use></svg></button><dialog><form method="dialog"><button aria-label="switch to OS theme" type="button" value="" aria-pressed="true"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-system"></use></svg> OS Default</button> <button aria-label="switch to light theme" type="button" value="light"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-light"></use></svg> Light</button> <button aria-label="switch to dark theme" type="button" value="dark"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-dark"></use></svg> Dark</button></form></dialog></div><button id="search-button"><svg class="icon search"><use href="/assets/images/icons-e5ccfc7d9b.svg#search"></use></svg> <span>⌘ K</span></button></div></div></header><dialog data-endpoint="/assets/search.json" id="search-dialog"><form class="search-topbar"><label for="search"><svg class="icon search"><use href="/assets/images/icons-e5ccfc7d9b.svg#search"></use></svg></label> <input autocomplete="off" autofocus id="search" placeholder="Search for articles, recipes, links" type="search"> <button aria-label="close" class="search-cancel" formmethod="dialog">Cancel</button></form><ul class="results"></ul></dialog><main class="content-container"><article><header><h1>Self-Documented Makefile V1.1</h1><div class="article-metadata"><time class="article-published-on" datetime="2022-07-26">July 26, 2022</time></div></header><p>I like Makefiles: The syntax is quite simple, it's easy to use and it's useful to group commands in one place. In 2016, Marmelab published an article on <a href="https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html">documenting a Makefile</a>. With some shell script voodoo, you can run <code>make help</code> and it will print all the available targets and their descriptions. It works and it is simple. I've been using this trick for years and I'm happy with it.</p><p>Today I would like to go one step further: Let's improve the <code>help</code> target so it also outputs the variables and their values. To do so, we can read the internal database thanks to <code>make -p</code>. This command prints a lot of information: recipes, prerequisites, environment variables, variables and so on.</p><figure class="code-snippet"><span class="language-tag">bash</span><pre><code class="code-block-inner"><span><span class="h02">make</span><span> </span><span class="h03">-pn</span><span> </span><span class="h00">hello=there</span><span> </span><span class="h04"># -n for a dry run</span></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-Documented Makefile V1.1 | Yann Prono</title>
+  <script type="module" src="/assets/js/dark.ts"></script>
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <script type="module" src="/assets/js/search.ts"></script>
+  <meta property="og:site_name" content="Yann Prono">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mcdostone.github.io/articles/self-documented-makefile-v1-1/">
+  <meta property="og:title" content="Yann Prono">
+  <meta property="og:image" content="https:/mcdostone.github.io/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="452">
+  <meta property="og:image:height" content="452">
+  <meta property="og:description" content="A trick to print Makefile variables and their values.">
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:image" content="https:/mcdostone.github.io/assets/images/og-image.jpg">
+  <meta property="twitter:title" content="Yann Prono">
+  <meta property="twitter:description" content="A trick to print Makefile variables and their values.">
+  <meta name="view-transition" content="same-origin" >
+  <meta name="description" content="A trick to print Makefile variables and their values.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link href="https://mcdostone.github.io/index.xml" type="application/atom+xml" rel="alternate" title="Atom feed">
+  <link rel="me" href="https://pouet.chapril.org/@yannp">
+</head>
+<body >
+<script>document.body.id = localStorage.getItem('theme')</script>
+<header class="header">
+  <div class="container">
+    <div>
+      <a href="/" class="active">Blog</a>
+      <a href="/recipes/" >Recipes</a>
+      <a href="/links/" >Links</a>
+    </div>
+    <div>
+      <div class="theme-selector">
+        <button aria-label="Open a dialog box to choose a theme" aria-haspopup="menu" type="button">
+          <svg class="icon theme">
+            <use href="/assets/images/icons.svg#theme-light" />
+          </svg>
+        </button>
+        <dialog>
+          <form method="dialog">
+            <button aria-label="switch to OS theme" type="button" aria-pressed="true" value="">
+              <svg>
+                <use href="/assets/images/icons.svg#theme-system" />
+              </svg>
+              OS Default
+            </button>
+            <button aria-label="switch to light theme" type="button" value="light">
+              <svg>
+                <use href="/assets/images/icons.svg#theme-light" />
+              </svg>
+              Light
+            </button>
+            <button aria-label="switch to dark theme" type="button" value="dark">
+              <svg>
+                <use href="/assets/images/icons.svg#theme-dark" />
+              </svg>
+              Dark
+            </button>
+          </form>
+        </dialog>
+      </div>
+      <button id="search-button">
+        <svg class="icon search">
+          <use href="/assets/images/icons.svg#search" />
+        </svg>
+        <span>⌘ K</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog data-endpoint="/assets/search.json" id="search-dialog">
+  <form class="search-topbar">
+    <label for="search"><svg class="icon search">
+        <use href="/assets/images/icons.svg#search" />
+      </svg></label>
+    <input autocomplete="off" autofocus type="search" id="search" placeholder="Search for articles, recipes, links">
+    <button class="search-cancel" aria-label="close" formmethod="dialog">Cancel</button>
+  </form>
+  <ul class="results">
+  </ul>
+</dialog>
+
+  <main class="content-container">
+<article>
+  <header>
+    <h1>Self-Documented Makefile V1.1</h1>
+    <div class="article-metadata">
+    <time class="article-published-on" datetime="2022-07-26">July 26, 2022</time>
+    </div>
+  </header>
+  <p>I like Makefiles: The syntax is quite simple, it's easy to use and it's useful to group commands in one place. In 2016, Marmelab published an article on <a href="https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html">documenting a Makefile</a>. With some shell script voodoo, you can run <code>make help</code> and it will print all the available targets and their descriptions. It works and it is simple. I've been using this trick for years and I'm happy with it.</p><p>Today I would like to go one step further: Let's improve the <code>help</code> target so it also outputs the variables and their values. To do so, we can read the internal database thanks to <code>make -p</code>. This command prints a lot of information: recipes, prerequisites, environment variables, variables and so on.</p><figure class="code-snippet"><span class="language-tag">bash</span><pre><code class="code-block-inner"><span><span class="h02">make</span><span> </span><span class="h03">-pn</span><span> </span><span class="h00">hello=there</span><span> </span><span class="h04"># -n for a dry run</span></span>
 <span><span class="h04"># environment</span></span>
 <span><span class="h02">XAUTHORITY</span><span> </span><span class="h00">=</span><span> </span><span class="h00">/run/user/1000/gdm/Xauthority</span></span>
 <span><span class="h04"># environment</span></span>
 <span><span class="h02">GDMSESSION</span><span> </span><span class="h00">=</span><span> </span><span class="h00">ubuntu</span></span>
 <span><span class="h04"># environment</span></span>
 <span><span class="h02">XMODIFIERS</span><span> </span><span class="h00">=</span><span> </span><span class="h00">@im=ibus</span></span>
-<span><span class="h04"># makefile (from 'Makefile', line 3)</span></span>
+<span><span class="h04"># makefile (from &apos;Makefile&apos;, line 3)</span></span>
 <span><span class="h02">NPROC</span><span> </span><span class="h00">:=</span><span> </span><span class="h03">12</span></span>
 <span><span class="h04"># command line</span></span>
 <span><span class="h02">hello</span><span> </span><span class="h00">=</span><span> </span><span class="h00">there</span></span>
 <span><span class="h04"># ....</span></span>
-<span></span></code></pre></figure><p>A quick lookup to the output later, I can extract the relevant information with the command, nothing fancy here:</p><figure class="code-snippet"><span class="language-tag">bash</span><pre><code class="code-block-inner"><span><span class="h02">make</span><span> </span><span class="h03">-pn</span><span> </span><span class="h09">|</span><span> </span><span class="h02">awk</span><span> </span><span class="h00">'/^# (makefile |command)/{getline; print}'</span></span>
-<span></span></code></pre></figure><p>Finally, let's format and print the result. <code>Makefile</code> looks like this:</p><figure class="code-snippet"><span class="language-tag">Makefile</span><pre><code class="code-block-inner"><span><span class="h10">.DEFAULT_GOAL = help</span></span>
+<span></span></code></pre>
+</figure><p>A quick lookup to the output later, I can extract the relevant information with the command, nothing fancy here:</p><figure class="code-snippet"><span class="language-tag">bash</span><pre><code class="code-block-inner"><span><span class="h02">make</span><span> </span><span class="h03">-pn</span><span> </span><span class="h09">|</span><span> </span><span class="h02">awk</span><span> </span><span class="h00">&apos;/^# (makefile |command)/{getline; print}&apos;</span></span>
+<span></span></code></pre>
+</figure><p>Finally, let's format and print the result. <code>Makefile</code> looks like this:</p><figure class="code-snippet"><span class="language-tag">Makefile</span><pre><code class="code-block-inner"><span><span class="h10">.DEFAULT_GOAL = help</span></span>
 <span><span class="h10">NPROC := </span><span class="h00">$(</span><span class="h03">shell</span><span class="h00"> nproc)</span></span>
 <span><span class="h10">HOST ?= 127.0.0.1</span></span>
 <span></span>
 <span><span class="h03">.PHONY</span><span class="h10">: help</span></span>
 <span></span>
 <span><span class="h02">help</span><span class="h10">: </span><span class="h04">## Show this help</span></span>
-<span><span>	</span><span class="h09">@</span><span class="h10">echo "Variables:"</span></span>
-<span><span>	</span><span class="h09">@</span><span class="h10">make -pnf </span><span class="h00">$(</span><span class="h10">MAKEFILE_LIST</span><span class="h00">)</span><span class="h10"> | awk '/^# (makefile |command)/{getline; print}' | grep -v "^MAKEFILE_LIST" | sort | uniq | awk 'BEGIN {FS = ":?= "}; {printf "  \033[36m%-30s\033[0m %s\n", </span><span class="h03">$$</span><span class="h10">1, </span><span class="h03">$$</span><span class="h10">2}'</span></span>
-<span><span>	</span><span class="h09">@</span><span class="h10">echo "\nTargets:"</span></span>
-<span><span>	</span><span class="h09">@</span><span class="h10">grep -E '^[/%a-zA-Z0-9_-]+: .*?## .*</span><span class="h03">$$</span><span class="h10">' </span><span class="h00">$(</span><span class="h10">MAKEFILE_LIST</span><span class="h00">)</span><span class="h10"> | sort | awk  'BEGIN {FS = ": .*?## "}; {printf "  \033[36m%-30s\033[0m %s\n", </span><span class="h03">$$</span><span class="h10">1, </span><span class="h03">$$</span><span class="h10">2}'</span></span>
-<span></span></code></pre></figure><figure class="code-snippet"><span class="language-tag">bash</span><pre><code class="code-block-inner"><span><span class="h02">make</span><span> </span><span class="h00">help</span><span> </span><span class="h00">hello=world</span></span>
+<span><span>	</span><span class="h09">@</span><span class="h10">echo &quot;Variables:&quot;</span></span>
+<span><span>	</span><span class="h09">@</span><span class="h10">make -pnf </span><span class="h00">$(</span><span class="h10">MAKEFILE_LIST</span><span class="h00">)</span><span class="h10"> | awk &apos;/^# (makefile |command)/{getline; print}&apos; | grep -v &quot;^MAKEFILE_LIST&quot; | sort | uniq | awk &apos;BEGIN {FS = &quot;:?= &quot;}; {printf &quot;  \033[36m%-30s\033[0m %s\n&quot;, </span><span class="h03">$$</span><span class="h10">1, </span><span class="h03">$$</span><span class="h10">2}&apos;</span></span>
+<span><span>	</span><span class="h09">@</span><span class="h10">echo &quot;\nTargets:&quot;</span></span>
+<span><span>	</span><span class="h09">@</span><span class="h10">grep -E &apos;^[/%a-zA-Z0-9_-]+: .*?## .*</span><span class="h03">$$</span><span class="h10">&apos; </span><span class="h00">$(</span><span class="h10">MAKEFILE_LIST</span><span class="h00">)</span><span class="h10"> | sort | awk  &apos;BEGIN {FS = &quot;: .*?## &quot;}; {printf &quot;  \033[36m%-30s\033[0m %s\n&quot;, </span><span class="h03">$$</span><span class="h10">1, </span><span class="h03">$$</span><span class="h10">2}&apos;</span></span>
+<span></span></code></pre>
+</figure><figure class="code-snippet"><span class="language-tag">bash</span><pre><code class="code-block-inner"><span><span class="h02">make</span><span> </span><span class="h00">help</span><span> </span><span class="h00">hello=world</span></span>
 <span><span class="h02">Variables:</span></span>
 <span><span>  </span><span class="h02">.DEFAULT_GOAL</span><span>                  </span><span class="h00">help</span></span>
 <span><span>  </span><span class="h02">HOST</span><span>                           </span><span class="h03">127.0</span><span class="h00">.0.1</span></span>
@@ -31,4 +131,34 @@
 <span></span>
 <span><span class="h02">Targets:</span></span>
 <span><span>  </span><span class="h02">help</span><span>                           </span><span class="h00">Show</span><span> </span><span class="h00">this</span><span> </span><span class="h00">help</span></span>
-<span></span></code></pre></figure></article></main><footer class="container"><div class="social-networks"><a href="/index.xml" aria-label="RSS feed"><svg class="icon rss"><use href="/assets/images/icons-e5ccfc7d9b.svg#rss"></use></svg> </a><a href="https://github.com/mcdostone" aria-label="github profile" rel="noopener noreferrer" target="_blank"><svg class="icon github"><use href="/assets/images/icons-e5ccfc7d9b.svg#github"></use></svg> </a><a href="https://pouet.chapril.org/@yannp" aria-label="Mastodon" rel="noopener noreferrer" target="_blank"><svg class="icon mastodon"><use href="/assets/images/icons-e5ccfc7d9b.svg#mastodon"></use></svg> </a><a href="https://www.root-me.org/Mcdostone" aria-label="Root-me" rel="noopener noreferrer" target="_blank"><svg class="icon root-me"><use href="/assets/images/icons-e5ccfc7d9b.svg#root-me"></use></svg></a></div></footer></body></html>
+<span></span></code></pre>
+</figure>
+</article>
+</main>
+<footer class="container">
+  <div class="social-networks">
+    <a aria-label="RSS feed" href="/index.xml">
+  <svg class="icon rss">
+    <use href="/assets/images/icons.svg#rss" />
+  </svg>
+</a>
+<a aria-label="github profile" target="_blank" rel="noopener noreferrer" href="https://github.com/mcdostone">
+  <svg class="icon github">
+    <use href="/assets/images/icons.svg#github" />
+  </svg>
+</a>
+<a aria-label="Mastodon" target="_blank" rel="noopener noreferrer" href="https://pouet.chapril.org/@yannp">
+  <svg class="icon mastodon">
+    <use href="/assets/images/icons.svg#mastodon" />
+  </svg>
+</a>
+<a aria-label="Root-me" target="_blank" rel="noopener noreferrer" href="https://www.root-me.org/Mcdostone">
+  <svg class="icon root-me">
+    <use href="/assets/images/icons.svg#root-me" />
+  </svg>
+</a>
+
+  </div>
+</footer>
+</body>
+</html>
