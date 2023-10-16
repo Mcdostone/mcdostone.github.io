@@ -1,164 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My syntax highlighter | Yann Prono</title>
-  <script type="module" src="/assets/js/dark.ts"></script>
-  <link href="/assets/css/style.css" rel="stylesheet">
-  <link href="/assets/css/editor.css" rel="stylesheet"><script type="module" src="/assets/js/search.ts"></script>
-  <meta property="og:site_name" content="Yann Prono">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://mcdostone.github.io/articles/syntax-highlighter/">
-  <meta property="og:title" content="Yann Prono">
-  <meta property="og:image" content="https:/mcdostone.github.io/assets/images/og-image.jpg">
-  <meta property="og:image:width" content="452">
-  <meta property="og:image:height" content="452">
-  <meta property="og:description" content="A lightweight build-time rendering Node.js syntax highlighter module based on Shiki.">
-  <meta property="twitter:card" content="summary">
-  <meta property="twitter:image" content="https:/mcdostone.github.io/assets/images/og-image.jpg">
-  <meta property="twitter:title" content="Yann Prono">
-  <meta property="twitter:description" content="A lightweight build-time rendering Node.js syntax highlighter module based on Shiki.">
-  <meta name="view-transition" content="same-origin" >
-  <meta name="description" content="A lightweight build-time rendering Node.js syntax highlighter module based on Shiki.">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link href="https://mcdostone.github.io/index.xml" type="application/atom+xml" rel="alternate" title="Atom feed">
-  <link rel="me" href="https://pouet.chapril.org/@yannp">
-</head>
-<body >
-<script>document.body.id = localStorage.getItem('theme')</script>
-<header class="header">
-  <div class="container">
-    <div>
-      <a href="/" class="active">Blog</a>
-      <a href="/recipes/" >Recipes</a>
-      <a href="/links/" >Links</a>
-    </div>
-    <div>
-      <div class="theme-selector">
-        <button aria-label="Open a dialog box to choose a theme" aria-haspopup="menu" type="button">
-          <svg class="icon theme">
-            <use href="/assets/images/icons.svg#theme-light" />
-          </svg>
-        </button>
-        <dialog>
-          <form method="dialog">
-            <button aria-label="switch to OS theme" type="button" aria-pressed="true" value="">
-              <svg>
-                <use href="/assets/images/icons.svg#theme-system" />
-              </svg>
-              OS Default
-            </button>
-            <button aria-label="switch to light theme" type="button" value="light">
-              <svg>
-                <use href="/assets/images/icons.svg#theme-light" />
-              </svg>
-              Light
-            </button>
-            <button aria-label="switch to dark theme" type="button" value="dark">
-              <svg>
-                <use href="/assets/images/icons.svg#theme-dark" />
-              </svg>
-              Dark
-            </button>
-          </form>
-        </dialog>
-      </div>
-      <button id="search-button">
-        <svg class="icon search">
-          <use href="/assets/images/icons.svg#search" />
-        </svg>
-        <span>⌘ K</span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<dialog data-endpoint="/assets/search.json" id="search-dialog">
-  <form class="search-topbar">
-    <label for="search"><svg class="icon search">
-        <use href="/assets/images/icons.svg#search" />
-      </svg></label>
-    <input autocomplete="off" autofocus type="search" id="search" placeholder="Search for articles, recipes, links">
-    <button class="search-cancel" aria-label="close" formmethod="dialog">Cancel</button>
-  </form>
-  <ul class="results">
-  </ul>
-</dialog>
-
-  <main class="content-container">
-<article>
-  <header>
-    <h1>My syntax highlighter</h1>
-    <div class="article-metadata">
-    <time class="article-published-on" datetime="2022-11-28">November 28, 2022</time>
-    </div>
-  </header>
-  <p>In this article, I'm going to explain how I chose a syntax highlighting library for my blog and how I improved it because yes,
-I have very high expectations:</p><ul>
-<li><p>The highlighting must be performed at build time. I use <a href="https://www.11ty.dev/">Eleventy</a> as a static site generator.</p></li>
-<li><p>The output format must be HTML.</p></li>
-<li><p>A Node.js library is preferable since Eleventy requires it.</p></li>
-<li><p>The library must support at least the following programming languages: HTML, CSS, JS, TS, Makefile, JSON, Golang, Ruby, C, Rust, and Java.</p></li>
-<li><p>Support of a dark theme is a plus.</p></li>
-<li><p>Embedding extra JS scripts is not a possibility: As you know, energy prices are getting crazy. I bought a <a href="https://www.youtube.com/watch?v=D3lObmKSAU0">turtleneck sweater</a> for my server but Github doesn't want to give me physical access to my machine so let's save some bytes.</p></li>
-<li><p>A concise and clean HTML output is appreciated.</p></li>
-</ul>
-<div class="heading">
-<h2 id="choosing-a-library">Choosing a library</h2>
-<a class="header-anchor" href="#choosing-a-library" aria-label="Section titled Choosing a library"><span></span></a></div>
-<p>I'm not going to reinvent the wheel. Let's explore the different libraries available on the <a href="https://www.youtube.com/watch?v=uK4-nUZiOH4">Internet</a>:</p><ul>
-<li><p><input tabindex="-1" type="checkbox" disabled> <a href="https://codemirror.net/">codemirror</a>: I use this library for the code vizualiser of <a href="https://samate.nist.gov/SARD/">SARD</a>. This library is complete but too overkilled for this blog. Furthermore, Codemirror is supposed to be run in a browser.</p></li>
-<li><p><input tabindex="-1" type="checkbox" disabled> <a href="https://shjs.sourceforge.net/">shjs</a>: Not available on <a href="https://www.npmjs.com/">npm</a>, bye bye.</p></li>
-<li><p><input tabindex="-1" type="checkbox" disabled> <a href="https://craig.is/making/rainbows">rainbow</a>: Supported languages don't match my needs.</p></li>
-<li><p><input tabindex="-1" type="checkbox" disabled checked> <a href="https://highlightjs.org/">highlightjs</a>: Highlight looks great. It's also very well integrated with Eleventy.</p></li>
-<li><p><input tabindex="-1" type="checkbox" disabled> <a href="https://prismjs.com/">prism.js</a>: Another library for the browser.</p></li>
-<li><p><input tabindex="-1" type="checkbox" disabled> <a href="https://torchlight.dev/">torchlight</a>: There's no way I pay for highlighting my shitty code.</p></li>
-<li><p><input tabindex="-1" type="checkbox" disabled checked> <a href="https://github.com/shikijs/shiki">shiki</a>: This one looks great too.</p></li>
-</ul>
-<p>After comparing highlightjs and shiki, I decided to choose <strong>shiki</strong> because the colors look great and sharp (inspired by VScode themes) and it's a way for me to test the flexibility and modularity of Eleventy. Let's run Shiki for the first time to see what the output looks like:</p><figure class="code-snippet"><span class="language-tag">HTML</span><pre><code class="code-block-inner"><span><span class="h04">&lt;!-- codeToHtml(`const shiki = require(&apos;shiki&apos;)`, { lang: &apos;js&apos; }) --&gt;</span></span>
-<span><span class="h10">&lt;</span><span class="h01">pre</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;shiki&quot;</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">code</span><span class="h10">&gt;</span></span>
-<span><span class="h10">    &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;line&quot;</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #81A1C1&quot;</span><span class="h10">&gt;const&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #D8DEE9FF&quot;</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #D8DEE9&quot;</span><span class="h10">&gt;shiki&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #D8DEE9FF&quot;</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #81A1C1&quot;</span><span class="h10">&gt;=&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #D8DEE9FF&quot;</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #ECEFF4&quot;</span><span class="h10">&gt;&apos;&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #A3BE8C&quot;</span><span class="h10">&gt;shiki&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">&quot;color: #ECEFF4&quot;</span><span class="h10">&gt;&apos;&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">    &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;/</span><span class="h01">code</span><span class="h10">&gt;</span></span>
-<span><span class="h10">&lt;/</span><span class="h01">pre</span><span class="h10">&gt;</span></span>
-<span></span></code></pre>
-</figure><p>Not too bad but few problems here:</p><ul>
-<li><p>Colors are hardcoded, meaning there is no way to support different color themes, especially the dark theme.</p></li>
-<li><p>The HTML output is verbose due to the <code>style</code> attribute of each token.</p></li>
-<li><p>A lot of colors are duplicated multiple times. For a small number of lines of code, it's not a big deal but when it comes to sharing big chunks of code, it increases the size of the HTML.</p></li>
-</ul>
-<p>In my opinion, a better approach would look like this:</p><figure class="code-snippet"><span class="language-tag">HTML</span><pre><code class="code-block-inner"><span><span class="h04">&lt;!-- classes are prefixed by &apos;h&apos; for &apos;highlight&apos; to make every class unique --&gt;</span></span>
-<span><span class="h04">&lt;!-- codeToHtml(`const shiki = require(&apos;shiki&apos;)`, { lang: &apos;js&apos; }) --&gt;</span></span>
-<span><span class="h10">&lt;</span><span class="h01">pre</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;shiki&quot;</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">code</span><span class="h10">&gt;</span></span>
-<span><span class="h10">    &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;line&quot;</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h1&quot;</span><span class="h10">&gt;const&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h2&quot;</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h3&quot;</span><span class="h10">&gt;shiki&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h2&quot;</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h1&quot;</span><span class="h10">&gt;=&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h2&quot;</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h4&quot;</span><span class="h10">&gt;&apos;&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h5&quot;</span><span class="h10">&gt;shiki&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h4&quot;</span><span class="h10">&gt;&apos;&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">    &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;/</span><span class="h01">code</span><span class="h10">&gt;</span></span>
-<span><span class="h10">&lt;/</span><span class="h01">pre</span><span class="h10">&gt;</span></span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"><title>My syntax highlighter | Yann Prono</title><script src="/assets/js/dark-123037b5.js" type="module"></script><link href="/assets/css/style-ee351ce2.css" rel="stylesheet"><link href="/assets/css/editor-ee5d2198.css" rel="stylesheet"><script src="/assets/js/search-5570d849.js" type="module"></script><meta content="Yann Prono" property="og:site_name"><meta content="en-us" property="og:locale"><meta content="article" property="og:type"><meta content="https://mcdostone.github.io/articles/syntax-highlighter/" property="og:url"><meta content="Yann Prono" property="og:title"><meta content="https:/mcdostone.github.io/assets/images/og-image.jpg" property="og:image"><meta content="452" property="og:image:width"><meta content="452" property="og:image:height"><meta content="A lightweight build-time rendering Node.js syntax highlighter module based on Shiki." property="og:description"><meta content="summary" property="twitter:card"><meta content="https:/mcdostone.github.io/assets/images/og-image.jpg" property="twitter:image"><meta content="Yann Prono" property="twitter:title"><meta content="A lightweight build-time rendering Node.js syntax highlighter module based on Shiki." property="twitter:description"><meta content="same-origin" name="view-transition"><meta content="A lightweight build-time rendering Node.js syntax highlighter module based on Shiki." name="description"><link href="/favicon-cbb243b1c9.svg" rel="icon" type="image/svg+xml"><link href="https://mcdostone.github.io/index.xml" rel="alternate" type="application/atom+xml" title="Atom feed"><link href="https://pouet.chapril.org/@yannp" rel="me"></head><body><script>document.body.id = localStorage.getItem('theme')</script><header class="header"><div class="container"><div><a href="/" class="active">Blog</a> <a href="/recipes/">Recipes</a> <a href="/links/">Links</a></div><div><div class="theme-selector"><button aria-label="Open a dialog box to choose a theme" type="button" aria-haspopup="menu"><svg class="icon theme"><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-light"></use></svg></button><dialog><form method="dialog"><button aria-label="switch to OS theme" type="button" value="" aria-pressed="true"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-system"></use></svg> OS Default</button> <button aria-label="switch to light theme" type="button" value="light"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-light"></use></svg> Light</button> <button aria-label="switch to dark theme" type="button" value="dark"><svg><use href="/assets/images/icons-e5ccfc7d9b.svg#theme-dark"></use></svg> Dark</button></form></dialog></div><button id="search-button"><svg class="icon search"><use href="/assets/images/icons-e5ccfc7d9b.svg#search"></use></svg> <span>⌘ K</span></button></div></div></header><dialog data-endpoint="/assets/search.json" id="search-dialog"><form class="search-topbar"><label for="search"><svg class="icon search"><use href="/assets/images/icons-e5ccfc7d9b.svg#search"></use></svg></label> <input type="search" id="search" autocomplete="off" autofocus placeholder="Search for articles, recipes, links"> <button aria-label="close" class="search-cancel" formmethod="dialog">Cancel</button></form><ul class="results"></ul></dialog><main class="content-container"><article><header><h1>My syntax highlighter</h1><div class="article-metadata"><time class="article-published-on" datetime="2022-11-28">November 28, 2022</time></div></header><p>In this article, I'm going to explain how I chose a syntax highlighting library for my blog and how I improved it because yes, I have very high expectations:</p><ul><li><p>The highlighting must be performed at build time. I use <a href="https://www.11ty.dev/">Eleventy</a> as a static site generator.</p></li><li><p>The output format must be HTML.</p></li><li><p>A Node.js library is preferable since Eleventy requires it.</p></li><li><p>The library must support at least the following programming languages: HTML, CSS, JS, TS, Makefile, JSON, Golang, Ruby, C, Rust, and Java.</p></li><li><p>Support of a dark theme is a plus.</p></li><li><p>Embedding extra JS scripts is not a possibility: As you know, energy prices are getting crazy. I bought a <a href="https://www.youtube.com/watch?v=D3lObmKSAU0">turtleneck sweater</a> for my server but Github doesn't want to give me physical access to my machine so let's save some bytes.</p></li><li><p>A concise and clean HTML output is appreciated.</p></li></ul><div class="heading"><h2 id="choosing-a-library">Choosing a library</h2><a href="#choosing-a-library" aria-label="Section titled Choosing a library" class="header-anchor"><span></span></a></div><p>I'm not going to reinvent the wheel. Let's explore the different libraries available on the <a href="https://www.youtube.com/watch?v=uK4-nUZiOH4">Internet</a>:</p><ul><li><p><input type="checkbox" disabled tabindex="-1"> <a href="https://codemirror.net/">codemirror</a>: I use this library for the code vizualiser of <a href="https://samate.nist.gov/SARD/">SARD</a>. This library is complete but too overkilled for this blog. Furthermore, Codemirror is supposed to be run in a browser.</p></li><li><p><input type="checkbox" disabled tabindex="-1"> <a href="https://shjs.sourceforge.net/">shjs</a>: Not available on <a href="https://www.npmjs.com/">npm</a>, bye bye.</p></li><li><p><input type="checkbox" disabled tabindex="-1"> <a href="https://craig.is/making/rainbows">rainbow</a>: Supported languages don't match my needs.</p></li><li><p><input type="checkbox" disabled tabindex="-1" checked> <a href="https://highlightjs.org/">highlightjs</a>: Highlight looks great. It's also very well integrated with Eleventy.</p></li><li><p><input type="checkbox" disabled tabindex="-1"> <a href="https://prismjs.com/">prism.js</a>: Another library for the browser.</p></li><li><p><input type="checkbox" disabled tabindex="-1"> <a href="https://torchlight.dev/">torchlight</a>: There's no way I pay for highlighting my shitty code.</p></li><li><p><input type="checkbox" disabled tabindex="-1" checked> <a href="https://github.com/shikijs/shiki">shiki</a>: This one looks great too.</p></li></ul><p>After comparing highlightjs and shiki, I decided to choose <strong>shiki</strong> because the colors look great and sharp (inspired by VScode themes) and it's a way for me to test the flexibility and modularity of Eleventy. Let's run Shiki for the first time to see what the output looks like:</p><figure class="code-snippet"><span class="language-tag">HTML</span><pre><code class="code-block-inner"><span><span class="h04">&lt;!-- codeToHtml(`const shiki = require('shiki')`, { lang: 'js' }) --></span></span>
+<span><span class="h10">&lt;</span><span class="h01">pre</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"shiki"</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">code</span><span class="h10">></span></span>
+<span><span class="h10">    &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"line"</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #81A1C1"</span><span class="h10">>const&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #D8DEE9FF"</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #D8DEE9"</span><span class="h10">>shiki&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #D8DEE9FF"</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #81A1C1"</span><span class="h10">>=&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #D8DEE9FF"</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #ECEFF4"</span><span class="h10">>'&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #A3BE8C"</span><span class="h10">>shiki&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">style</span><span class="h10">=</span><span class="h00">"color: #ECEFF4"</span><span class="h10">>'&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">    &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;/</span><span class="h01">code</span><span class="h10">></span></span>
+<span><span class="h10">&lt;/</span><span class="h01">pre</span><span class="h10">></span></span>
+<span></span></code></pre></figure><p>Not too bad but few problems here:</p><ul><li><p>Colors are hardcoded, meaning there is no way to support different color themes, especially the dark theme.</p></li><li><p>The HTML output is verbose due to the <code>style</code> attribute of each token.</p></li><li><p>A lot of colors are duplicated multiple times. For a small number of lines of code, it's not a big deal but when it comes to sharing big chunks of code, it increases the size of the HTML.</p></li></ul><p>In my opinion, a better approach would look like this:</p><figure class="code-snippet"><span class="language-tag">HTML</span><pre><code class="code-block-inner"><span><span class="h04">&lt;!-- classes are prefixed by 'h' for 'highlight' to make every class unique --></span></span>
+<span><span class="h04">&lt;!-- codeToHtml(`const shiki = require('shiki')`, { lang: 'js' }) --></span></span>
+<span><span class="h10">&lt;</span><span class="h01">pre</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"shiki"</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">code</span><span class="h10">></span></span>
+<span><span class="h10">    &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"line"</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h1"</span><span class="h10">>const&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h2"</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h3"</span><span class="h10">>shiki&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h2"</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h1"</span><span class="h10">>=&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h2"</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h4"</span><span class="h10">>'&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h5"</span><span class="h10">>shiki&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">      &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h4"</span><span class="h10">>'&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">    &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;/</span><span class="h01">code</span><span class="h10">></span></span>
+<span><span class="h10">&lt;/</span><span class="h01">pre</span><span class="h10">></span></span>
 <span></span>
-<span><span class="h04">&lt;!-- The following CSS rules will be embedded in a CSS file for caching concerns --&gt;</span></span>
-<span><span class="h10">&lt;</span><span class="h01">style</span><span class="h10">&gt;</span></span>
+<span><span class="h04">&lt;!-- The following CSS rules will be embedded in a CSS file for caching concerns --></span></span>
+<span><span class="h10">&lt;</span><span class="h01">style</span><span class="h10">></span></span>
 <span><span>  </span><span class="h02">.shiki</span><span class="h10"> {</span></span>
 <span><span>    </span><span class="h08">--h1</span><span class="h10">: </span><span class="h03">#81a1c1</span><span class="h10">;</span></span>
 <span><span>    </span><span class="h08">--h2</span><span class="h10">: </span><span class="h03">#d8dee9ff</span><span class="h10">;</span></span>
@@ -180,29 +55,12 @@ I have very high expectations:</p><ul>
 <span><span>    </span><span class="h03">color</span><span class="h10">: </span><span class="h03">var</span><span class="h10">(</span><span class="h08">--h2</span><span class="h10">);</span></span>
 <span><span class="h10">  }</span></span>
 <span><span>  </span><span class="h04">/* ... */</span></span>
-<span><span class="h10">&lt;/</span><span class="h01">style</span><span class="h10">&gt;</span></span>
-<span></span></code></pre>
-</figure><p>There are a lot of benefits here:</p><ul>
-<li><p>If I want to change the theme one day, I'll just need to update the CSS files.</p></li>
-<li><p>I can define as many themes as I want by defining some extra CSS variables.</p></li>
-<li><p>The HTML is way cleaner than the default output.</p></li>
-</ul>
-<div class="heading">
-<h2 id="enhancing-shiki's-output">Enhancing shiki's output</h2>
-<a class="header-anchor" href="#enhancing-shiki's-output" aria-label="Section titled Enhancing shiki's output"><span></span></a></div>
-<p>There's a <a href="https://github.com/shikijs/shiki/blob/main/docs/themes.md#theming-with-css-variables">special theme</a> <code>css-variables</code> that uses CSS variables instead of hardcoded values. Using this theme would allow me to support dark theme. After testing this feature, it turns out the result is not as great as choosing a normal theme like <code>github-light</code>. So I'm going to bake some homemade code.</p><p>Shiki's API is well-designed. It exposes 2 functions: <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/src/highlighter.ts#LL130C18-L130C18"><code>codeToHtml</code></a> which returns the HTML output from a string of code and <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/src/highlighter.ts#LL115C12-L115C18"><code>codeToThemedTokens</code></a> which returns an intermediate representation of the highlighted code. I'm going to use <code>codeToThemedTokens</code> so I can have control over the HTML rendering. The function returns an object of type <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/src/themedTokenizer.ts#L72"><code>IThemedToken[][]</code></a>, the first dimension is for the lines and the second dimension is for the different tokens, nothing fancy here.</p><ul>
-<li><p><code>highlight.ts</code> is the main module. the function <code>highlight</code> will be used in Eleventy.</p></li>
-<li><p><code>generate-theme.ts</code> is a program that must be run once to generate the CSS rules and <code>theme-mapping.json</code>.</p></li>
-<li><p><code>theme-mapping.json</code> maps an HTML class with a color of a theme (here <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/themes/github-light.json"><code>github-light.json</code></a>).</p></li>
-</ul>
-<div class="editor tabs" style="--height: 1554px"><div class="editor-container" role="tablist"><div class="tab">
-    <input type="radio" aria-roledescription="tab" id="tab-0" name="tab-group-0" checked>
-    <label for="tab-0">highlight.ts</label>
-    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h09">import</span><span class="h10"> { encode } </span><span class="h09">from</span><span> </span><span class="h00">&apos;html-entities&apos;</span></span>
-<span><span class="h09">import</span><span class="h10"> { Highlighter, IThemedToken } </span><span class="h09">from</span><span> </span><span class="h00">&apos;shiki&apos;</span></span>
+<span><span class="h10">&lt;/</span><span class="h01">style</span><span class="h10">></span></span>
+<span></span></code></pre></figure><p>There are a lot of benefits here:</p><ul><li><p>If I want to change the theme one day, I'll just need to update the CSS files.</p></li><li><p>I can define as many themes as I want by defining some extra CSS variables.</p></li><li><p>The HTML is way cleaner than the default output.</p></li></ul><div class="heading"><h2 id="enhancing-shiki's-output">Enhancing shiki's output</h2><a href="#enhancing-shiki's-output" aria-label="Section titled Enhancing shiki's output" class="header-anchor"><span></span></a></div><p>There's a <a href="https://github.com/shikijs/shiki/blob/main/docs/themes.md#theming-with-css-variables">special theme</a> <code>css-variables</code> that uses CSS variables instead of hardcoded values. Using this theme would allow me to support dark theme. After testing this feature, it turns out the result is not as great as choosing a normal theme like <code>github-light</code>. So I'm going to bake some homemade code.</p><p>Shiki's API is well-designed. It exposes 2 functions: <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/src/highlighter.ts#LL130C18-L130C18"><code>codeToHtml</code></a> which returns the HTML output from a string of code and <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/src/highlighter.ts#LL115C12-L115C18"><code>codeToThemedTokens</code></a> which returns an intermediate representation of the highlighted code. I'm going to use <code>codeToThemedTokens</code> so I can have control over the HTML rendering. The function returns an object of type <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/src/themedTokenizer.ts#L72"><code>IThemedToken[][]</code></a>, the first dimension is for the lines and the second dimension is for the different tokens, nothing fancy here.</p><ul><li><p><code>highlight.ts</code> is the main module. the function <code>highlight</code> will be used in Eleventy.</p></li><li><p><code>generate-theme.ts</code> is a program that must be run once to generate the CSS rules and <code>theme-mapping.json</code>.</p></li><li><p><code>theme-mapping.json</code> maps an HTML class with a color of a theme (here <a href="https://github.com/shikijs/shiki/blob/main/packages/shiki/themes/github-light.json"><code>github-light.json</code></a>).</p></li></ul><div class="editor tabs" style="--height: 1554px"><div class="editor-container" role="tablist"><div class="tab"><input type="radio" id="tab-0" aria-roledescription="tab" name="tab-group-0" checked> <label for="tab-0">highlight.ts</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h09">import</span><span class="h10"> { encode } </span><span class="h09">from</span><span> </span><span class="h00">'html-entities'</span></span>
+<span><span class="h09">import</span><span class="h10"> { Highlighter, IThemedToken } </span><span class="h09">from</span><span> </span><span class="h00">'shiki'</span></span>
 <span></span>
 <span><span class="h04">// eslint-disable-next-line @typescript-eslint/no-var-requires, unicorn/prefer-module</span></span>
-<span><span class="h09">const</span><span> </span><span class="h03">mapping</span><span> </span><span class="h09">=</span><span> </span><span class="h02">require</span><span class="h10">(</span><span class="h00">&apos;./theme-mapping.json&apos;</span><span class="h10">)</span></span>
+<span><span class="h09">const</span><span> </span><span class="h03">mapping</span><span> </span><span class="h09">=</span><span> </span><span class="h02">require</span><span class="h10">(</span><span class="h00">'./theme-mapping.json'</span><span class="h10">)</span></span>
 <span></span>
 <span><span class="h09">class</span><span> </span><span class="h02">Highlight</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h09">constructor</span><span class="h10">(</span><span class="h09">private</span><span> </span><span class="h09">readonly</span><span> </span><span class="h08">h</span><span class="h09">:</span><span> </span><span class="h02">Highlighter</span><span class="h10">) {}</span></span>
@@ -228,43 +86,39 @@ I have very high expectations:</p><ul>
 <span><span>    </span><span class="h04">// eslint-disable-next-line @typescript-eslint/no-non-null-assertion</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">theme</span><span> </span><span class="h09">=</span><span> </span><span class="h03">this</span><span class="h10">.h.</span><span class="h02">getTheme</span><span class="h10">()</span></span>
 <span></span>
-<span><span>    </span><span class="h09">let</span><span class="h10"> html </span><span class="h09">=</span><span> </span><span class="h00">&apos;&apos;</span></span>
+<span><span>    </span><span class="h09">let</span><span class="h10"> html </span><span class="h09">=</span><span> </span><span class="h00">''</span></span>
 <span><span>    </span><span class="h09">for</span><span class="h10"> (</span><span class="h09">const</span><span> </span><span class="h03">line</span><span> </span><span class="h09">of</span><span class="h10"> tokens) {</span></span>
-<span><span class="h10">      html </span><span class="h09">+=</span><span> </span><span class="h00">`&lt;span&gt;`</span></span>
+<span><span class="h10">      html </span><span class="h09">+=</span><span> </span><span class="h00">`&lt;span>`</span></span>
 <span><span>      </span><span class="h09">for</span><span class="h10"> (</span><span class="h09">const</span><span> </span><span class="h03">token</span><span> </span><span class="h09">of</span><span class="h10"> line) {</span></span>
 <span><span>        </span><span class="h09">const</span><span> </span><span class="h03">className</span><span> </span><span class="h09">=</span><span class="h10"> token.color </span><span class="h09">?</span><span class="h10"> mapping[token.color.</span><span class="h02">toUpperCase</span><span class="h10">()] </span><span class="h09">:</span><span class="h10"> theme.fg</span></span>
 <span><span class="h10">        html </span><span class="h09">+=</span><span> </span><span class="h03">this</span><span class="h10">.</span><span class="h02">generateSpanTag</span><span class="h10">(token, className)</span></span>
 <span><span class="h10">      }</span></span>
-<span><span class="h10">      html </span><span class="h09">+=</span><span> </span><span class="h00">`&lt;/span&gt;</span><span class="h03">\n</span><span class="h00">`</span></span>
+<span><span class="h10">      html </span><span class="h09">+=</span><span> </span><span class="h00">`&lt;/span></span><span class="h03">\n</span><span class="h00">`</span></span>
 <span><span class="h10">    }</span></span>
 <span><span>    </span><span class="h09">return</span><span class="h10"> html.</span><span class="h02">trimEnd</span><span class="h10">()</span></span>
 <span><span class="h10">  }</span></span>
 <span></span>
 <span><span>  </span><span class="h02">generateSpanTag</span><span class="h10">(</span><span class="h08">token</span><span class="h09">:</span><span> </span><span class="h02">IThemedToken</span><span class="h10">, </span><span class="h08">className</span><span class="h10">) {</span></span>
 <span><span>    </span><span class="h09">if</span><span class="h10"> (</span><span class="h09">!</span><span class="h10">token.content.</span><span class="h02">trim</span><span class="h10">()) {</span></span>
-<span><span>      </span><span class="h09">return</span><span> </span><span class="h00">`&lt;span&gt;${</span><span class="h03">this</span><span class="h00">.</span><span class="h02">processToken</span><span class="h00">(</span><span class="h10">token</span><span class="h00">)</span><span class="h00">}&lt;/span&gt;`</span></span>
+<span><span>      </span><span class="h09">return</span><span> </span><span class="h00">`&lt;span>${</span><span class="h03">this</span><span class="h00">.</span><span class="h02">processToken</span><span class="h00">(</span><span class="h10">token</span><span class="h00">)</span><span class="h00">}&lt;/span>`</span></span>
 <span><span class="h10">    }</span></span>
-<span><span>    </span><span class="h09">return</span><span> </span><span class="h00">`&lt;span class=&quot;${</span><span class="h10">className</span><span class="h00">}&quot;&gt;${</span><span class="h03">this</span><span class="h00">.</span><span class="h02">processToken</span><span class="h00">(</span><span class="h10">token</span><span class="h00">)</span><span class="h00">}&lt;/span&gt;`</span></span>
+<span><span>    </span><span class="h09">return</span><span> </span><span class="h00">`&lt;span class="${</span><span class="h10">className</span><span class="h00">}">${</span><span class="h03">this</span><span class="h00">.</span><span class="h02">processToken</span><span class="h00">(</span><span class="h10">token</span><span class="h00">)</span><span class="h00">}&lt;/span>`</span></span>
 <span><span class="h10">  }</span></span>
 <span></span>
 <span><span>  </span><span class="h02">processToken</span><span class="h10">(</span><span class="h08">token</span><span class="h09">:</span><span> </span><span class="h02">IThemedToken</span><span class="h10">) {</span></span>
-<span><span>    </span><span class="h09">const</span><span> </span><span class="h03">HTTP_URL</span><span> </span><span class="h09">=</span><span class="h00"> /(https</span><span class="h09">?</span><span class="h00">:</span><span class="h01">\/\/</span><span class="h03">.[\w#%+.:=@~-]</span><span class="h09">{2,256}</span><span class="h01">\.</span><span class="h03">[a-z]</span><span class="h09">{2,6}\b</span><span class="h03">[\w#%&amp;+./:=?@~-]</span><span class="h09">*</span><span class="h00">)/</span><span class="h09">g</span></span>
+<span><span>    </span><span class="h09">const</span><span> </span><span class="h03">HTTP_URL</span><span> </span><span class="h09">=</span><span class="h00"> /(https</span><span class="h09">?</span><span class="h00">:</span><span class="h01">\/\/</span><span class="h03">.[\w#%+.:=@~-]</span><span class="h09">{2,256}</span><span class="h01">\.</span><span class="h03">[a-z]</span><span class="h09">{2,6}\b</span><span class="h03">[\w#%&+./:=?@~-]</span><span class="h09">*</span><span class="h00">)/</span><span class="h09">g</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">t</span><span> </span><span class="h09">=</span><span class="h10"> token.content.</span><span class="h02">match</span><span class="h10">(</span><span class="h03">HTTP_URL</span><span class="h10">)</span></span>
 <span><span>    </span><span class="h09">if</span><span class="h10"> (t) {</span></span>
-<span><span>      </span><span class="h09">return</span><span class="h10"> token.content.</span><span class="h02">replaceAll</span><span class="h10">(t[</span><span class="h03">0</span><span class="h10">], </span><span class="h00">`&lt;a href=&quot;${</span><span class="h10">t</span><span class="h00">[</span><span class="h03">0</span><span class="h00">]</span><span class="h00">}&quot;&gt;${</span><span class="h02">encode</span><span class="h00">(</span><span class="h10">t</span><span class="h00">[</span><span class="h03">0</span><span class="h00">])</span><span class="h00">}&lt;/a&gt;`</span><span class="h10">)</span></span>
+<span><span>      </span><span class="h09">return</span><span class="h10"> token.content.</span><span class="h02">replaceAll</span><span class="h10">(t[</span><span class="h03">0</span><span class="h10">], </span><span class="h00">`&lt;a href="${</span><span class="h10">t</span><span class="h00">[</span><span class="h03">0</span><span class="h00">]</span><span class="h00">}">${</span><span class="h02">encode</span><span class="h00">(</span><span class="h10">t</span><span class="h00">[</span><span class="h03">0</span><span class="h00">])</span><span class="h00">}&lt;/a>`</span><span class="h10">)</span></span>
 <span><span class="h10">    }</span></span>
 <span><span>    </span><span class="h09">return</span><span> </span><span class="h02">encode</span><span class="h10">(token.content)</span></span>
 <span><span class="h10">  }</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
 <span><span class="h09">export</span><span class="h10"> { Highlight }</span></span>
-<span></span></code></pre>
-  </div><div class="tab">
-    <input type="radio" aria-roledescription="tab" id="tab-1" name="tab-group-0" >
-    <label for="tab-1">generate-theme.ts</label>
-    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h09">import</span><span class="h10"> { promises </span><span class="h09">as</span><span class="h10"> fs } </span><span class="h09">from</span><span> </span><span class="h00">&apos;node:fs&apos;</span></span>
-<span><span class="h09">import</span><span class="h10"> path </span><span class="h09">from</span><span> </span><span class="h00">&apos;node:path&apos;</span></span>
-<span><span class="h09">import</span><span class="h10"> { loadTheme } </span><span class="h09">from</span><span> </span><span class="h00">&apos;shiki&apos;</span></span>
+<span></span></code></pre></div><div class="tab"><input type="radio" id="tab-1" aria-roledescription="tab" name="tab-group-0"> <label for="tab-1">generate-theme.ts</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h09">import</span><span class="h10"> { promises </span><span class="h09">as</span><span class="h10"> fs } </span><span class="h09">from</span><span> </span><span class="h00">'node:fs'</span></span>
+<span><span class="h09">import</span><span class="h10"> path </span><span class="h09">from</span><span> </span><span class="h00">'node:path'</span></span>
+<span><span class="h09">import</span><span class="h10"> { loadTheme } </span><span class="h09">from</span><span> </span><span class="h00">'shiki'</span></span>
 <span></span>
 <span><span class="h09">interface</span><span> </span><span class="h02">Colors</span><span class="h10"> {</span></span>
 <span><span>  </span><span class="h08">light</span><span class="h09">:</span><span> </span><span class="h03">string</span></span>
@@ -272,44 +126,44 @@ I have very high expectations:</p><ul>
 <span><span class="h10">}</span></span>
 <span></span>
 <span><span class="h04">// <a href="https://github.com/shikijs/shiki/tree/main/packages/shiki/themes">https://github.com/shikijs/shiki/tree/main/packages/shiki/themes</a></span></span>
-<span><span class="h09">const</span><span> </span><span class="h03">DEFAULT_THEME</span><span> </span><span class="h09">=</span><span> </span><span class="h00">&apos;github&apos;</span></span>
+<span><span class="h09">const</span><span> </span><span class="h03">DEFAULT_THEME</span><span> </span><span class="h09">=</span><span> </span><span class="h00">'github'</span></span>
 <span></span>
 <span><span class="h09">function</span><span> </span><span class="h02">generateClass</span><span class="h10">(</span><span class="h08">index</span><span class="h10">) {</span></span>
-<span><span>  </span><span class="h09">return</span><span> </span><span class="h00">`h${</span><span class="h02">String</span><span class="h00">(</span><span class="h10">index</span><span class="h00">).</span><span class="h02">padStart</span><span class="h00">(</span><span class="h03">2</span><span class="h00">, </span><span class="h00">&apos;0&apos;</span><span class="h00">)</span><span class="h00">}`</span></span>
+<span><span>  </span><span class="h09">return</span><span> </span><span class="h00">`h${</span><span class="h02">String</span><span class="h00">(</span><span class="h10">index</span><span class="h00">).</span><span class="h02">padStart</span><span class="h00">(</span><span class="h03">2</span><span class="h00">, </span><span class="h00">'0'</span><span class="h00">)</span><span class="h00">}`</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
-<span><span class="h09">function</span><span> </span><span class="h02">generateCSS</span><span class="h10">(</span><span class="h08">colors</span><span class="h09">:</span><span> </span><span class="h02">Array</span><span class="h10">&lt;</span><span class="h02">Colors</span><span class="h10">&gt;) {</span></span>
-<span><span>  </span><span class="h09">let</span><span class="h10"> cssOutput </span><span class="h09">=</span><span> </span><span class="h00">&apos;&apos;</span></span>
-<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">variables</span><span> </span><span class="h09">=</span><span class="h10"> colors.</span><span class="h02">map</span><span class="h10">((</span><span class="h08">colors</span><span class="h10">, </span><span class="h08">index</span><span class="h10">) </span><span class="h09">=&gt;</span><span> </span><span class="h00">`    --${</span><span class="h02">generateClass</span><span class="h00">(</span><span class="h10">index</span><span class="h00">)</span><span class="h00">}: ${</span><span class="h10">colors</span><span class="h00">.</span><span class="h10">light</span><span class="h00">};`</span><span class="h10">)</span></span>
-<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">darkVariables</span><span> </span><span class="h09">=</span><span class="h10"> colors.</span><span class="h02">map</span><span class="h10">((</span><span class="h08">colors</span><span class="h10">, </span><span class="h08">index</span><span class="h10">) </span><span class="h09">=&gt;</span><span> </span><span class="h00">`    --${</span><span class="h02">generateClass</span><span class="h00">(</span><span class="h10">index</span><span class="h00">)</span><span class="h00">}: ${</span><span class="h10">colors</span><span class="h00">.</span><span class="h10">dark</span><span class="h00">};`</span><span class="h10">)</span></span>
+<span><span class="h09">function</span><span> </span><span class="h02">generateCSS</span><span class="h10">(</span><span class="h08">colors</span><span class="h09">:</span><span> </span><span class="h02">Array</span><span class="h10">&lt;</span><span class="h02">Colors</span><span class="h10">>) {</span></span>
+<span><span>  </span><span class="h09">let</span><span class="h10"> cssOutput </span><span class="h09">=</span><span> </span><span class="h00">''</span></span>
+<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">variables</span><span> </span><span class="h09">=</span><span class="h10"> colors.</span><span class="h02">map</span><span class="h10">((</span><span class="h08">colors</span><span class="h10">, </span><span class="h08">index</span><span class="h10">) </span><span class="h09">=></span><span> </span><span class="h00">`    --${</span><span class="h02">generateClass</span><span class="h00">(</span><span class="h10">index</span><span class="h00">)</span><span class="h00">}: ${</span><span class="h10">colors</span><span class="h00">.</span><span class="h10">light</span><span class="h00">};`</span><span class="h10">)</span></span>
+<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">darkVariables</span><span> </span><span class="h09">=</span><span class="h10"> colors.</span><span class="h02">map</span><span class="h10">((</span><span class="h08">colors</span><span class="h10">, </span><span class="h08">index</span><span class="h10">) </span><span class="h09">=></span><span> </span><span class="h00">`    --${</span><span class="h02">generateClass</span><span class="h00">(</span><span class="h10">index</span><span class="h00">)</span><span class="h00">}: ${</span><span class="h10">colors</span><span class="h00">.</span><span class="h10">dark</span><span class="h00">};`</span><span class="h10">)</span></span>
 <span><span>  </span><span class="h09">for</span><span class="h10"> (</span><span class="h09">let</span><span class="h10"> index </span><span class="h09">=</span><span> </span><span class="h03">0</span><span class="h10">; index </span><span class="h09">&lt;</span><span class="h10"> colors.</span><span class="h03">length</span><span class="h10">; index</span><span class="h09">++</span><span class="h10">) {</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">paddedIndex</span><span> </span><span class="h09">=</span><span> </span><span class="h02">generateClass</span><span class="h10">(index)</span></span>
 <span><span class="h10">    cssOutput </span><span class="h09">=</span><span> </span><span class="h00">`${</span><span class="h10">cssOutput</span><span class="h00">}.${</span><span class="h10">paddedIndex</span><span class="h00">} { color: var(--${</span><span class="h10">paddedIndex</span><span class="h00">}) }</span><span class="h03">\n</span><span class="h00">`</span></span>
 <span><span class="h10">  }</span></span>
 <span><span>  </span><span class="h09">return</span><span> </span><span class="h00">`.code-block-inner {</span></span>
-<span><span class="h00">${</span><span class="h10">variables</span><span class="h00">.</span><span class="h02">join</span><span class="h00">(</span><span class="h00">&apos;</span><span class="h03">\n</span><span class="h00">&apos;</span><span class="h00">)</span><span class="h00">}</span></span>
+<span><span class="h00">${</span><span class="h10">variables</span><span class="h00">.</span><span class="h02">join</span><span class="h00">(</span><span class="h00">'</span><span class="h03">\n</span><span class="h00">'</span><span class="h00">)</span><span class="h00">}</span></span>
 <span><span class="h00">}</span></span>
 <span></span>
 <span><span class="h00">#dark .code-block-inner {</span></span>
-<span><span class="h00">${</span><span class="h10">darkVariables</span><span class="h00">.</span><span class="h02">join</span><span class="h00">(</span><span class="h00">&apos;</span><span class="h03">\n</span><span class="h00">&apos;</span><span class="h00">)</span><span class="h00">}</span></span>
+<span><span class="h00">${</span><span class="h10">darkVariables</span><span class="h00">.</span><span class="h02">join</span><span class="h00">(</span><span class="h00">'</span><span class="h03">\n</span><span class="h00">'</span><span class="h00">)</span><span class="h00">}</span></span>
 <span><span class="h00">}</span></span>
 <span></span>
 <span><span class="h00">${</span><span class="h10">cssOutput</span><span class="h00">}`</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
-<span><span class="h09">function</span><span> </span><span class="h02">generateMappingFile</span><span class="h10">(</span><span class="h08">colors</span><span class="h09">:</span><span> </span><span class="h02">Array</span><span class="h10">&lt;</span><span class="h02">Colors</span><span class="h10">&gt;) {</span></span>
-<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">mapping</span><span> </span><span class="h09">=</span><span> </span><span class="h09">new</span><span> </span><span class="h02">Map</span><span class="h10">&lt;</span><span class="h03">string</span><span class="h10">, </span><span class="h03">string</span><span class="h10">&gt;()</span></span>
+<span><span class="h09">function</span><span> </span><span class="h02">generateMappingFile</span><span class="h10">(</span><span class="h08">colors</span><span class="h09">:</span><span> </span><span class="h02">Array</span><span class="h10">&lt;</span><span class="h02">Colors</span><span class="h10">>) {</span></span>
+<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">mapping</span><span> </span><span class="h09">=</span><span> </span><span class="h09">new</span><span> </span><span class="h02">Map</span><span class="h10">&lt;</span><span class="h03">string</span><span class="h10">, </span><span class="h03">string</span><span class="h10">>()</span></span>
 <span><span>  </span><span class="h09">for</span><span class="h10"> (</span><span class="h09">const</span><span class="h10"> [</span><span class="h03">index</span><span class="h10">, </span><span class="h03">color</span><span class="h10">] </span><span class="h09">of</span><span class="h10"> colors.</span><span class="h02">entries</span><span class="h10">()) {</span></span>
 <span><span class="h10">    mapping.</span><span class="h02">set</span><span class="h10">(color.light.</span><span class="h02">toUpperCase</span><span class="h10">(), </span><span class="h02">generateClass</span><span class="h10">(index))</span></span>
 <span><span class="h10">  }</span></span>
 <span><span>  </span><span class="h04">// eslint-disable-next-line unicorn/prefer-module</span></span>
-<span><span>  </span><span class="h09">return</span><span class="h10"> fs.</span><span class="h02">writeFile</span><span class="h10">(path.</span><span class="h02">join</span><span class="h10">(__dirname, </span><span class="h00">&apos;theme-mapping.json&apos;</span><span class="h10">), </span><span class="h03">JSON</span><span class="h10">.</span><span class="h02">stringify</span><span class="h10">(Object.</span><span class="h02">fromEntries</span><span class="h10">(mapping), </span><span class="h03">undefined</span><span class="h10">, </span><span class="h03">2</span><span class="h10">))</span></span>
+<span><span>  </span><span class="h09">return</span><span class="h10"> fs.</span><span class="h02">writeFile</span><span class="h10">(path.</span><span class="h02">join</span><span class="h10">(__dirname, </span><span class="h00">'theme-mapping.json'</span><span class="h10">), </span><span class="h03">JSON</span><span class="h10">.</span><span class="h02">stringify</span><span class="h10">(Object.</span><span class="h02">fromEntries</span><span class="h10">(mapping), </span><span class="h03">undefined</span><span class="h10">, </span><span class="h03">2</span><span class="h10">))</span></span>
 <span><span class="h10">}</span></span>
 <span></span>
 <span><span class="h09">async</span><span> </span><span class="h09">function</span><span> </span><span class="h02">main</span><span class="h10">(</span><span class="h08">themeName</span><span class="h09">:</span><span> </span><span class="h03">string</span><span class="h10">) {</span></span>
-<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">colors</span><span> </span><span class="h09">=</span><span> </span><span class="h09">new</span><span> </span><span class="h02">Map</span><span class="h10">&lt;</span><span class="h03">string</span><span class="h10">, </span><span class="h03">string</span><span class="h10">&gt;()</span></span>
-<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">theme</span><span> </span><span class="h09">=</span><span> </span><span class="h09">await</span><span> </span><span class="h02">loadTheme</span><span class="h10">(</span><span class="h00">`themes/${</span><span class="h10">themeName</span><span class="h00">}-light.json`</span><span class="h10">).</span><span class="h02">then</span><span class="h10">((</span><span class="h08">t</span><span class="h10">) </span><span class="h09">=&gt;</span><span class="h10"> t.settings)</span></span>
-<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">darkTheme</span><span> </span><span class="h09">=</span><span> </span><span class="h09">await</span><span> </span><span class="h02">loadTheme</span><span class="h10">(</span><span class="h00">`themes/${</span><span class="h10">themeName</span><span class="h00">}-dark.json`</span><span class="h10">).</span><span class="h02">then</span><span class="h10">((</span><span class="h08">t</span><span class="h10">) </span><span class="h09">=&gt;</span><span class="h10"> t.settings)</span></span>
+<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">colors</span><span> </span><span class="h09">=</span><span> </span><span class="h09">new</span><span> </span><span class="h02">Map</span><span class="h10">&lt;</span><span class="h03">string</span><span class="h10">, </span><span class="h03">string</span><span class="h10">>()</span></span>
+<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">theme</span><span> </span><span class="h09">=</span><span> </span><span class="h09">await</span><span> </span><span class="h02">loadTheme</span><span class="h10">(</span><span class="h00">`themes/${</span><span class="h10">themeName</span><span class="h00">}-light.json`</span><span class="h10">).</span><span class="h02">then</span><span class="h10">((</span><span class="h08">t</span><span class="h10">) </span><span class="h09">=></span><span class="h10"> t.settings)</span></span>
+<span><span>  </span><span class="h09">const</span><span> </span><span class="h03">darkTheme</span><span> </span><span class="h09">=</span><span> </span><span class="h09">await</span><span> </span><span class="h02">loadTheme</span><span class="h10">(</span><span class="h00">`themes/${</span><span class="h10">themeName</span><span class="h00">}-dark.json`</span><span class="h10">).</span><span class="h02">then</span><span class="h10">((</span><span class="h08">t</span><span class="h10">) </span><span class="h09">=></span><span class="h10"> t.settings)</span></span>
 <span><span>  </span><span class="h09">for</span><span class="h10"> (</span><span class="h09">const</span><span> </span><span class="h03">index</span><span> </span><span class="h09">in</span><span class="h10"> theme) {</span></span>
 <span><span>    </span><span class="h09">const</span><span> </span><span class="h03">key</span><span> </span><span class="h09">=</span><span class="h10"> theme[index].settings.foreground </span><span class="h09">||</span><span> </span><span class="h03">undefined</span></span>
 <span><span>    </span><span class="h09">if</span><span class="h10"> (key) {</span></span>
@@ -323,8 +177,8 @@ I have very high expectations:</p><ul>
 <span><span class="h10">  }</span></span>
 <span></span>
 <span><span>  </span><span class="h09">const</span><span> </span><span class="h03">sortedColors</span><span> </span><span class="h09">=</span><span class="h10"> [</span><span class="h09">...</span><span class="h10">colors]</span></span>
-<span><span class="h10">    .</span><span class="h02">map</span><span class="h10">(([</span><span class="h08">light</span><span class="h10">, </span><span class="h08">dark</span><span class="h10">]) </span><span class="h09">=&gt;</span><span class="h10"> ({ light, dark }))</span></span>
-<span><span class="h10">    .</span><span class="h02">sort</span><span class="h10">((</span><span class="h08">a</span><span class="h10">, </span><span class="h08">b</span><span class="h10">) </span><span class="h09">=&gt;</span><span class="h10"> {</span></span>
+<span><span class="h10">    .</span><span class="h02">map</span><span class="h10">(([</span><span class="h08">light</span><span class="h10">, </span><span class="h08">dark</span><span class="h10">]) </span><span class="h09">=></span><span class="h10"> ({ light, dark }))</span></span>
+<span><span class="h10">    .</span><span class="h02">sort</span><span class="h10">((</span><span class="h08">a</span><span class="h10">, </span><span class="h08">b</span><span class="h10">) </span><span class="h09">=></span><span class="h10"> {</span></span>
 <span><span>      </span><span class="h09">return</span><span class="h10"> a.light.</span><span class="h02">localeCompare</span><span class="h10">(b.dark)</span></span>
 <span><span class="h10">    })</span></span>
 <span></span>
@@ -335,69 +189,30 @@ I have very high expectations:</p><ul>
 <span><span class="h04">// node_modules/.bin/ts-node modules/eleventy/generate-theme.ts</span></span>
 <span><span class="h04">// eslint-disable-next-line unicorn/prefer-top-level-await</span></span>
 <span><span class="h02">main</span><span class="h10">(process.argv[</span><span class="h03">2</span><span class="h10">] </span><span class="h09">||</span><span> </span><span class="h03">DEFAULT_THEME</span><span class="h10">).</span><span class="h02">catch</span><span class="h10">(console.error)</span></span>
-<span></span></code></pre>
-  </div><div class="tab">
-    <input type="radio" aria-roledescription="tab" id="tab-2" name="tab-group-0" >
-    <label for="tab-2">theme-mapping.json</label>
-    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h10">{</span></span>
-<span><span>  </span><span class="h03">&quot;#032F62&quot;</span><span class="h10">: </span><span class="h00">&quot;h00&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#22863A&quot;</span><span class="h10">: </span><span class="h00">&quot;h01&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#6F42C1&quot;</span><span class="h10">: </span><span class="h00">&quot;h02&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#005CC5&quot;</span><span class="h10">: </span><span class="h00">&quot;h03&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#6A737D&quot;</span><span class="h10">: </span><span class="h00">&quot;h04&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#F6F8FA&quot;</span><span class="h10">: </span><span class="h00">&quot;h05&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#586069&quot;</span><span class="h10">: </span><span class="h00">&quot;h06&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#B31D28&quot;</span><span class="h10">: </span><span class="h00">&quot;h07&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#E36209&quot;</span><span class="h10">: </span><span class="h00">&quot;h08&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#D73A49&quot;</span><span class="h10">: </span><span class="h00">&quot;h09&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#24292E&quot;</span><span class="h10">: </span><span class="h00">&quot;h10&quot;</span><span class="h10">,</span></span>
-<span><span>  </span><span class="h03">&quot;#FAFBFC&quot;</span><span class="h10">: </span><span class="h00">&quot;h11&quot;</span></span>
+<span></span></code></pre></div><div class="tab"><input type="radio" id="tab-2" aria-roledescription="tab" name="tab-group-0"> <label for="tab-2">theme-mapping.json</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h10">{</span></span>
+<span><span>  </span><span class="h03">"#032F62"</span><span class="h10">: </span><span class="h00">"h00"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#22863A"</span><span class="h10">: </span><span class="h00">"h01"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#6F42C1"</span><span class="h10">: </span><span class="h00">"h02"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#005CC5"</span><span class="h10">: </span><span class="h00">"h03"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#6A737D"</span><span class="h10">: </span><span class="h00">"h04"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#F6F8FA"</span><span class="h10">: </span><span class="h00">"h05"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#586069"</span><span class="h10">: </span><span class="h00">"h06"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#B31D28"</span><span class="h10">: </span><span class="h00">"h07"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#E36209"</span><span class="h10">: </span><span class="h00">"h08"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#D73A49"</span><span class="h10">: </span><span class="h00">"h09"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#24292E"</span><span class="h10">: </span><span class="h00">"h10"</span><span class="h10">,</span></span>
+<span><span>  </span><span class="h03">"#FAFBFC"</span><span class="h10">: </span><span class="h00">"h11"</span></span>
 <span><span class="h10">}</span></span>
-<span></span></code></pre>
-  </div><div class="tab">
-    <input type="radio" aria-roledescription="tab" id="tab-3" name="tab-group-0" >
-    <label for="tab-3">output.html</label>
-    <pre role="tabpanel"><code class="code-block-inner"><span><span class="h10">&lt;</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h11&quot;</span><span class="h10">&gt;const&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h03&quot;</span><span class="h10">&gt;shiki&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h11&quot;</span><span class="h10">&gt;=&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span class="h10">&gt; &lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h05&quot;</span><span class="h10">&gt;require&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h08&quot;</span><span class="h10">&gt;(&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h01&quot;</span><span class="h10">&gt;&apos;shiki&apos;&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">&quot;h08&quot;</span><span class="h10">&gt;)&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span><span class="h10">&lt;/</span><span class="h01">span</span><span class="h10">&gt;</span></span>
-<span></span></code></pre>
-  </div></div></div>
-
-</article>
-</main>
-<footer class="container">
-  <div class="social-networks">
-    <a aria-label="RSS feed" href="/index.xml">
-  <svg class="icon rss">
-    <use href="/assets/images/icons.svg#rss" />
-  </svg>
-</a>
-<a aria-label="github profile" target="_blank" rel="noopener noreferrer" href="https://github.com/mcdostone">
-  <svg class="icon github">
-    <use href="/assets/images/icons.svg#github" />
-  </svg>
-</a>
-<a aria-label="Mastodon" target="_blank" rel="noopener noreferrer" href="https://pouet.chapril.org/@yannp">
-  <svg class="icon mastodon">
-    <use href="/assets/images/icons.svg#mastodon" />
-  </svg>
-</a>
-<a aria-label="Root-me" target="_blank" rel="noopener noreferrer" href="https://www.root-me.org/Mcdostone">
-  <svg class="icon root-me">
-    <use href="/assets/images/icons.svg#root-me" />
-  </svg>
-</a>
-
-  </div>
-</footer>
-</body>
-</html>
+<span></span></code></pre></div><div class="tab"><input type="radio" id="tab-3" aria-roledescription="tab" name="tab-group-0"> <label for="tab-3">output.html</label><pre role="tabpanel"><code class="code-block-inner"><span><span class="h10">&lt;</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h11"</span><span class="h10">>const&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h03"</span><span class="h10">>shiki&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h11"</span><span class="h10">>=&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span class="h10">> &lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h05"</span><span class="h10">>require&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h08"</span><span class="h10">>(&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h01"</span><span class="h10">>'shiki'&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">  &lt;</span><span class="h01">span</span><span> </span><span class="h02">class</span><span class="h10">=</span><span class="h00">"h08"</span><span class="h10">>)&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span><span class="h10">&lt;/</span><span class="h01">span</span><span class="h10">></span></span>
+<span></span></code></pre></div></div></div></article></main><footer class="container"><div class="social-networks"><a href="/index.xml" aria-label="RSS feed"><svg class="icon rss"><use href="/assets/images/icons-e5ccfc7d9b.svg#rss"></use></svg> </a><a href="https://github.com/mcdostone" aria-label="github profile" rel="noopener noreferrer" target="_blank"><svg class="icon github"><use href="/assets/images/icons-e5ccfc7d9b.svg#github"></use></svg> </a><a href="https://pouet.chapril.org/@yannp" aria-label="Mastodon" rel="noopener noreferrer" target="_blank"><svg class="icon mastodon"><use href="/assets/images/icons-e5ccfc7d9b.svg#mastodon"></use></svg> </a><a href="https://www.root-me.org/Mcdostone" aria-label="Root-me" rel="noopener noreferrer" target="_blank"><svg class="icon root-me"><use href="/assets/images/icons-e5ccfc7d9b.svg#root-me"></use></svg></a></div></footer></body></html>
