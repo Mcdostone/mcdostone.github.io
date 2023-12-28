@@ -4,26 +4,26 @@
   <subtitle>My blog</subtitle>
   <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2023-10-16T00:00:00Z</updated>
+  <updated>2023-12-28T16:45:47Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
   <entry>
-    <title>Happy birthday</title>
-    <link rel="alternate" href="https://mcdostone.github.io/articles/h4ppy-b1r7hd4y/"/>
-    <id>https://mcdostone.github.io/articles/h4ppy-b1r7hd4y/</id>
-    <updated>2023-10-16T00:00:00Z</updated>
+    <title></title>
+    <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
+    <id>https://mcdostone.github.io/assets/search.json</id>
+    <updated>2023-12-28T16:45:47Z</updated>
     <summary type="text">
       
     </summary>
   </entry>
   <entry>
-    <title></title>
-    <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
-    <id>https://mcdostone.github.io/assets/search.json</id>
-    <updated>2023-08-15T22:36:18Z</updated>
+    <title>Happy birthday</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/h4ppy-b1r7hd4y/"/>
+    <id>https://mcdostone.github.io/articles/h4ppy-b1r7hd4y/</id>
+    <updated>2023-10-16T00:00:00Z</updated>
     <summary type="text">
       
     </summary>
