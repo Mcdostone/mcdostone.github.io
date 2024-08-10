@@ -4,12 +4,21 @@
   <subtitle>My blog</subtitle>
   <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2024-01-07T00:00:00Z</updated>
+  <updated>2024-08-10T16:01:36Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title></title>
+    <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
+    <id>https://mcdostone.github.io/assets/search.json</id>
+    <updated>2024-08-10T16:01:36Z</updated>
+    <summary type="text">
+      
+    </summary>
+  </entry>
   <entry>
     <title>Cake à la courgette et fromage de chèvre</title>
     <link rel="alternate" href="https://mcdostone.github.io/recipes/goat-cheese-squash-savoury-cake/"/>
@@ -18,15 +27,6 @@
     <category term="recipe"/>
     <summary type="text">
       Cake salé végétarien à la courgette et fromage de chévre
-    </summary>
-  </entry>
-  <entry>
-    <title></title>
-    <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
-    <id>https://mcdostone.github.io/assets/search.json</id>
-    <updated>2023-12-28T17:06:04Z</updated>
-    <summary type="text">
-      
     </summary>
   </entry>
   <entry>
