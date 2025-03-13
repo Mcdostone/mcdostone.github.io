@@ -4,7 +4,7 @@
   <subtitle>My blog</subtitle>
   <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2024-08-10T16:01:36Z</updated>
+  <updated>2025-03-13T15:11:40Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
@@ -14,9 +14,40 @@
     <title></title>
     <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
     <id>https://mcdostone.github.io/assets/search.json</id>
-    <updated>2024-08-10T16:01:36Z</updated>
+    <updated>2025-03-13T15:11:40Z</updated>
     <summary type="text">
       
+    </summary>
+  </entry>
+  <entry>
+    <title></title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/2025-01-11-why-yozefu/"/>
+    <id>https://mcdostone.github.io/articles/2025-01-11-why-yozefu/</id>
+    <updated>2025-01-11T00:00:00Z</updated>
+    <summary type="text">
+      
+    </summary>
+  </entry>
+  <entry>
+    <title>Pâtes d&#39;aubergines grillées au parmesan</title>
+    <link rel="alternate" href="https://mcdostone.github.io/recipes/roasted-eggplant-pasta/"/>
+    <id>https://mcdostone.github.io/recipes/roasted-eggplant-pasta/</id>
+    <updated>2024-12-30T00:00:00Z</updated>
+    <category term="recipe"/>
+    <summary type="text">
+      Cake salé végétarien aux poivrons, olives et féta
+    </summary>
+  </entry>
+  <entry>
+    <title>Why Yōzefu?</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/why-yozefu/"/>
+    <id>https://mcdostone.github.io/articles/why-yozefu/</id>
+    <updated>2024-01-12T00:00:00Z</updated>
+    <category term="rust"/>
+    <category term="tui"/>
+    <category term="cli"/>
+    <summary type="text">
+      A terminal user interface for searching for data in Apache Kafka.
     </summary>
   </entry>
   <entry>
