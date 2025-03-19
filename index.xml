@@ -20,6 +20,18 @@
     </summary>
   </entry>
   <entry>
+    <title>Why Yōzefu?</title>
+    <link rel="alternate" href="https://mcdostone.github.io/articles/why-yozefu/"/>
+    <id>https://mcdostone.github.io/articles/why-yozefu/</id>
+    <updated>2025-03-13T00:00:00Z</updated>
+    <category term="rust"/>
+    <category term="tui"/>
+    <category term="cli"/>
+    <summary type="text">
+      A terminal user interface for searching for data in Apache Kafka.
+    </summary>
+  </entry>
+  <entry>
     <title></title>
     <link rel="alternate" href="https://mcdostone.github.io/articles/2025-01-11-why-yozefu/"/>
     <id>https://mcdostone.github.io/articles/2025-01-11-why-yozefu/</id>
@@ -36,18 +48,6 @@
     <category term="recipe"/>
     <summary type="text">
       Cake salé végétarien aux poivrons, olives et féta
-    </summary>
-  </entry>
-  <entry>
-    <title>Why Yōzefu?</title>
-    <link rel="alternate" href="https://mcdostone.github.io/articles/why-yozefu/"/>
-    <id>https://mcdostone.github.io/articles/why-yozefu/</id>
-    <updated>2024-03-13T00:00:00Z</updated>
-    <category term="rust"/>
-    <category term="tui"/>
-    <category term="cli"/>
-    <summary type="text">
-      A terminal user interface for searching for data in Apache Kafka.
     </summary>
   </entry>
   <entry>
