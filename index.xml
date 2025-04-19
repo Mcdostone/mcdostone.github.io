@@ -4,12 +4,21 @@
   <subtitle>My blog</subtitle>
   <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2025-03-13T15:11:40Z</updated>
+  <updated>2025-04-17T00:00:00Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title></title>
+    <link rel="alternate" href="https://mcdostone.github.io/slides/2025-04-17-devoxxfr-ratatui/"/>
+    <id>https://mcdostone.github.io/slides/2025-04-17-devoxxfr-ratatui/</id>
+    <updated>2025-04-17T00:00:00Z</updated>
+    <summary type="text">
+      
+    </summary>
+  </entry>
   <entry>
     <title></title>
     <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
