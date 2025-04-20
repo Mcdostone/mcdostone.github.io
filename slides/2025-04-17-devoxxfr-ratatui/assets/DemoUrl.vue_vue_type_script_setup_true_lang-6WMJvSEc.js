@@ -1,1 +1,0 @@
-import{d as s,r as a,f as o,o as r,ac as n,g as l,t as c}from"./modules/vue-CcxHahpj.js";import{u as p}from"./slidev/context-p21H6UYP.js";const _={class:"public-url"},i=["href"],x=s({__name:"DemoUrl",setup(d){p();const e=a("https://bit.ly/devoxx-rat");return(m,t)=>(r(),o("p",_,[t[0]||(t[0]=n(" 🌐 ")),l("a",{target:"_blank",href:e.value},c(e.value),9,i)]))}});export{x as _};
