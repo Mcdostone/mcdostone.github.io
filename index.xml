@@ -4,12 +4,22 @@
   <subtitle>My blog</subtitle>
   <link href="https://mcdostone.github.io/index.xml" rel="self"/>
   <link href="https://mcdostone.github.io"/>
-  <updated>2025-06-18T17:15:51Z</updated>
+  <updated>2025-06-23T00:00:00Z</updated>
   <id>https://mcdostone.github.io/</id>
   <author>
     <name>Yann Prono</name>
     <uri>https://mcdostone.github.io/</uri>
   </author>
+  <entry>
+    <title>Quesadillas croustillantes à la patate</title>
+    <link rel="alternate" href="https://mcdostone.github.io/recipes/quesadillas-croustillantes-a-la-patate/"/>
+    <id>https://mcdostone.github.io/recipes/quesadillas-croustillantes-a-la-patate/</id>
+    <updated>2025-06-23T00:00:00Z</updated>
+    <category term="recipe"/>
+    <summary type="text">
+      Si
+    </summary>
+  </entry>
   <entry>
     <title></title>
     <link rel="alternate" href="https://mcdostone.github.io/assets/search.json"/>
